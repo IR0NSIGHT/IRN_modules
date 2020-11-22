@@ -19,6 +19,7 @@ _duration = _module getVariable "duration";
 _duration = parseNumber _duration;
 _center = _module; 
 _maxDistance = 3000; //maximum distance to target to still hear sounds
+_headPos = _center; //declare to avoid nullpointer
 /* params for debugging / use as script
 //requires an object called "center" (as its varname in editor) as the soundsource. object will not be touched or teleported.
 _action = "init";
@@ -43,14 +44,14 @@ private _listRare = [
 		"A3\Sounds_F\weapons\Explosion\expl_shell_1.wss",
 		"A3\Sounds_F\weapons\Explosion\expl_big_1.wss"
 ];
-//place soundsource in direction of city with 400m away from player
-_headPos = _center;
+
+
+
 if (_debug) then {
 	//hint "starting audio";
-	"starting ambient_battles" remoteExec ["IRN_remoteSound",0, true];
+	"starting ambient_battles" remoteExec ["hint",0, true];
 };
 
-sleep 2;
 _start = time;
 _end = _start + _duration;
 while {time < _end} do {
@@ -67,7 +68,6 @@ while {time < _end} do {
 		[_sound,	[0,0,0],	random 15,	random 10,0.5 + random 0.5,_center,_dist,_maxDistance,_debug] remoteExec ["IRN_remoteSound",0, true];
 	};
 	//--------------
-	//TODO: move remotesound methods to central, serverside script so position isnt calculated twice 
 	if (random 100 < 5) then { //at 5% chance spawn a single rare sound (big explosion and the like)
 		_sound = selectRandom _listRare;
 		//["_sound","_pos","_shots","_delay","_volume"]
