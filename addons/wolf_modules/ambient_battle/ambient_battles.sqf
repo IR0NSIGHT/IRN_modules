@@ -29,43 +29,7 @@ _debug = true;
 _maxDistance = 3000; //maximum distance to target to still hear sounds
 */
 if (!isServer || _action !="init") exitWith {}; //only executes ingame, not in Eden
-IRN_calcSoundPos = {
-		params ["_center","_dist","_headPos"];
-		_posP = getPosASL player;	//getpos player
-		_posC = getPosASL _center;	//getpos of center
-		_direction = _posC vectorDiff _posP; //get desired positon of selfiestick headgear
-		
-		if (vectorMagnitude _direction < _dist) then { //if center is closer than _dist, set pos directly at center
-			_headPos = _posC;
-		} else { //else set in direction of center at _dist meters away
-			_dirNorm = vectorNormalized _direction;
-			_direction = _dirNorm vectorMultiply _dist;
-			_headPos = _posP vectorAdd _direction;
-		};
-		_headPos
-};
-IRN_spawnSalvo = {
-		params["_sound","_pos","_shots","_delay","_volume"];
-		sleep _delay;
-		for "_i" from 0 to _shots do {
-			playSound3D [_sound, nil, false, _pos, _volume, 0, 0]; // play sound
-			sleep random [0.02,0.2,0.5];
-		};
-};
-IRN_remoteSound = { //plays the specified sound on client
-		params["_sound","_pos","_shots","_delay","_volume","_center","_dist","_maxDistance","_debug"];
-		//get distance to center
-		_d =_center distance player;
-		if (_d > _maxDistance) exitWith {
-			if (_debug) then {
-				hint ("out of range of sound: " + str _d + "| max: " + str _maxDistance);
-			};
-		};
-		//get pos
-		_pos = [_center,_dist] call IRN_calcSoundPos;
-		//play salvo
-		[_sound,_pos,_shots,_delay,_volume] call IRN_spawnSalvo;
-};
+
 private _i = 0; //iteration counter
 private ["_posC","_posP","_direction","_dirNorm","_dist","_center","_source"];
 private	_listShots = [
@@ -82,7 +46,8 @@ private _listRare = [
 //place soundsource in direction of city with 400m away from player
 _headPos = _center;
 if (_debug) then {
-	hint "starting audio";
+	//hint "starting audio";
+	"starting ambient_battles" remoteExec ["IRN_remoteSound",0, true];
 };
 
 sleep 2;
@@ -97,11 +62,17 @@ while {time < _end} do {
 	//--------play sounds
 	//remote exec position and sound play
 	for "_i" from 0 to 5 do { //spawn up to 5 salvos of fast fire (MG)
-		_sound = selectRandom (if (random 1 < 0.05) then {_listRare} else {_listShots});
+		_sound = selectRandom _listShots;
+		//["_sound","_pos","_shots","_delay","_volume"]
 		[_sound,	[0,0,0],	random 15,	random 10,0.5 + random 0.5,_center,_dist,_maxDistance,_debug] remoteExec ["IRN_remoteSound",0, true];
 	};
 	//--------------
-	//TODO add explosion execution
+	//TODO: move remotesound methods to central, serverside script so position isnt calculated twice 
+	if (random 100 < 5) then { //at 5% chance spawn a single rare sound (big explosion and the like)
+		_sound = selectRandom _listRare;
+		//["_sound","_pos","_shots","_delay","_volume"]
+		[_sound,	[0,0,0],	1,	random 10,0.5 + random 0.5,_center,_dist,_maxDistance,_debug] remoteExec ["IRN_remoteSound",0, true];
+	};
 	//TODO change calculatePos to be able to use from global. -> GetPosSourceForPlayer(x)
 	sleep random 20;
 };
