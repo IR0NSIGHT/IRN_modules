@@ -1,0 +1,1 @@
+"starting ambient_battles" remoteExec ["hint",0, true];

@@ -1,0 +1,11 @@
+author			= "IR0NSIGHT";
+onLoadName		= "Testing some stuff yah`know";
+onLoadMission	= "A group of weebs is tasked with infiltrating the christian values of America.";
+//loadScreen		= "images\loadScreen.paa";
+
+class Header
+{
+	gameType =  Coop;	// Game type
+	minPlayers =  1;	// minimum number of players the mission supports
+	maxPlayers = 10;	// maximum number of players the mission supports
+};
