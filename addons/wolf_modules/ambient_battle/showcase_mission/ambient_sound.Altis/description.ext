@@ -21,6 +21,8 @@ class CfgFunctions
 			class spawnTracer {file = "WOLF_Modules\ambient_battle\functions\fn_spawnTracer.sqf"};
 			class randomVector {file = "WOLF_Modules\ambient_battle\functions\fn_randomVector.sqf"};
 			class explosionLight {file = "WOLF_Modules\ambient_battle\functions\fn_explosionLight.sqf"};
+			class killLights {file = "WOLF_Modules\ambient_battle\functions\fn_killLights.sqf"};
+			class interpolate {file = "WOLF_Modules\ambient_battle\functions\fn_interpolate.sqf"};
         //    class remoteSound {file = "WOLF_Modules\ambient_battle\IRN_remoteSound.sqf"};
         };
     };
