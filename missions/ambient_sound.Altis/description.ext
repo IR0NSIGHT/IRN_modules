@@ -1,0 +1,29 @@
+author			= "IR0NSIGHT";
+onLoadName		= "Testing some stuff yah`know";
+onLoadMission	= "A group of weebs is tasked with infiltrating the christian values of America.";
+//loadScreen		= "images\loadScreen.paa";
+
+class Header
+{
+	gameType =  Coop;	// Game type
+	minPlayers =  1;	// minimum number of players the mission supports
+	maxPlayers = 10;	// maximum number of players the mission supports
+};
+
+class CfgFunctions
+{
+	class IRN //my tag class
+	{
+        class myCategory {
+            class calcSoundPos {file = "WOLF_Modules\ambient_battle\functions\fn_calcSoundPos.sqf";};
+			class testFunction  {file = "WOLF_Modules\ambient_battle\functions\fn_test.sqf";};
+            class spawnSalvo {file = "WOLF_Modules\ambient_battle\functions\fn_spawnSalvo.sqf"};
+			class spawnTracer {file = "WOLF_Modules\ambient_battle\functions\fn_spawnTracer.sqf"};
+			class randomVector {file = "WOLF_Modules\ambient_battle\functions\fn_randomVector.sqf"};
+			class explosionLight {file = "WOLF_Modules\ambient_battle\functions\fn_explosionLight.sqf"};
+			class killLights {file = "WOLF_Modules\ambient_battle\functions\fn_killLights.sqf"};
+			class interpolate {file = "WOLF_Modules\ambient_battle\functions\fn_interpolate.sqf"};
+        //    class remoteSound {file = "WOLF_Modules\ambient_battle\IRN_remoteSound.sqf"};
+        };
+    };
+};

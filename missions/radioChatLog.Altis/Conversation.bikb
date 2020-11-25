@@ -1,0 +1,36 @@
+class Sentences
+{
+	class AirstrikeRequest 
+	{
+		// %team and %location will be replaced by the game engine with according values
+		text = "%team requesting close air support at grid %location ";
+
+		// available words are defined in config > RadioProtocol > Words
+		speech[] = {%team,front,veh_infantry_s};
+
+		class Arguments 
+		{
+			class Team { type = "simple"; };		// refers to %Team, first element of speech[]
+			// "RequestingCloseAirSupportAtGrid" is part of Radio Protocol
+			class Location { type = "simple"; };	// refers to %Location, last element of speech[]
+		};
+	};
+    class DynamicSay 
+	{
+		//
+		text = "%List";
+
+		// available words are defined in config > RadioProtocol > Words
+		speech[] = {%list};
+
+		class Arguments 
+		{
+			class List { type = "simple"; };		// refers to %Team, first element of speech[]
+		};
+	};
+};
+
+class Arguments {};
+class Special {};
+startWithVocal[] = { hour };
+startWithConsonant[] = { europe, university };

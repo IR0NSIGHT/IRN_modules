@@ -1,0 +1,11 @@
+class CfgSentences
+{
+	class MissionName
+	{
+		class Event1
+		{
+			file = "Conversation.bikb";
+			#include "Conversation.bikb" // avoids a double declaration
+		};
+	};
+};

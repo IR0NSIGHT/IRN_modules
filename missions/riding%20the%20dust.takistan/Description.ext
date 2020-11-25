@@ -1,0 +1,17 @@
+class CfgSentences
+{
+	class MissionName
+	{
+		class Event1
+		{
+			file = "Conversation.bikb";
+			#include "Conversation.bikb" // avoids a double declaration
+		};
+	};
+};
+class CfgRadio
+{
+	sounds[] = {};
+	#include "sounds\IRN_CAS_sitrep.hpp"
+	#include "sounds\IRN_flightcontrol.hpp"
+};

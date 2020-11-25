@@ -1,0 +1,9 @@
+author			= "IR0NSIGHT";
+onLoadName		= "Showcase AI JTAC";
+onLoadMission	= "Showing and testing the automated JTAC for CAS";
+
+class CfgRadio
+{
+	sounds[] = {};
+	#include "sounds\offTarget.hpp"
+};
