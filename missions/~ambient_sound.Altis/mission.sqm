@@ -1,0 +1,470 @@
+version=54;
+class EditorData
+{
+	moveGridStep=1;
+	angleGridStep=0.2617994;
+	scaleGridStep=1;
+	autoGroupingDist=10;
+	toggles=1;
+	class ItemIDProvider
+	{
+		nextID=61;
+	};
+	class MarkerIDProvider
+	{
+		nextID=3;
+	};
+	class Camera
+	{
+		pos[]={3144.7346,81.006058,13081.687};
+		dir[]={0.85177988,-0.51268584,-0.10802711};
+		up[]={0.5086208,0.8585704,-0.064506352};
+		aside[]={-0.12582001,-1.147273e-007,-0.99207956};
+	};
+};
+binarizationWanted=0;
+sourceName="~ambient_sound";
+addons[]=
+{
+	"CUP_Editor_Rocks_Config",
+	"A3_Ui_F",
+	"po_main",
+	"A3_Modules_F_Effects",
+	"po_factions_fic",
+	"asr_ai3_popfor_c"
+};
+class AddonsMetaData
+{
+	class List
+	{
+		items=6;
+		class Item0
+		{
+			className="CUP_Editor_Rocks_Config";
+			name="CUP_Editor_Rocks_Config";
+		};
+		class Item1
+		{
+			className="A3_Ui_F";
+			name="Arma 3 - User Interface";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item2
+		{
+			className="po_main";
+			name="po_main";
+			author="Leight, Keeway";
+		};
+		class Item3
+		{
+			className="A3_Modules_F";
+			name="Arma 3 Alpha - Scripted Modules";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item4
+		{
+			className="po_factions_fic";
+			name="po_factions_fic";
+			author="Leight, Keeway";
+		};
+		class Item5
+		{
+			className="po_vehicles";
+			name="asr_ai3_popfor_c";
+			author="Keeway, Leight";
+		};
+	};
+};
+dlcs[]=
+{
+	"LOP_LeightsOPFOR"
+};
+randomSeed=1421045;
+class ScenarioData
+{
+	author="IR0NSIGHT";
+};
+class Mission
+{
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.27126399;
+		startWindDir=180;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.27126399;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		wavesForced=1;
+		windForced=1;
+		year=2035;
+		month=6;
+		day=24;
+		hour=20;
+		minute=-20;
+		startFogDecay=0.014;
+		forecastFogDecay=0.014;
+		class CustomAttributes
+		{
+			name="Intel";
+			class Attribute0
+			{
+				property="ENH_timeMultiplier";
+				expression="if (!is3DEN && {isServer && {_value != 1}}) then {setTimeMultiplier _value}";
+				class Value
+				{
+					class data
+					{
+						class type
+						{
+							type[]=
+							{
+								"SCALAR"
+							};
+						};
+						value=0.2;
+					};
+				};
+			};
+			nAttributes=1;
+		};
+	};
+	class Entities
+	{
+		items=9;
+		class Item0
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3597.3887,28.37067,12933.729};
+				angles[]={0.015998369,0,0.034652505};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="call{execVM ""initAB.sqf"";}";
+				name="center";
+			};
+			id=0;
+			type="CUP_R2_RockTower";
+			atlOffset=-1.6212463e-005;
+		};
+		class Item1
+		{
+			dataType="Marker";
+			position[]={3786.0842,15.676758,12743.725};
+			name="marker_6";
+			type="mil_arrow";
+			angle=312.99112;
+			id=20;
+			atlOffset=-6.3555088;
+		};
+		class Item2
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3153.6682,80.634491,13085.425};
+			};
+			side="Empty";
+			flags=1;
+			class Attributes
+			{
+			};
+			id=49;
+			type="lop_Flag_ua_F";
+			atlOffset=8.7291031;
+		};
+		class Item3
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={3154.3159,78.194305,13083.465};
+			};
+			id=52;
+			type="ModuleChemlight_F";
+			atlOffset=10.932182;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ModuleChemlight_F_Type";
+					expression="_this setVariable ['Type',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="ACE_G_Chemlight_HiRed";
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item4
+		{
+			dataType="Group";
+			side="East";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3153.2261,78.365944,13081.002};
+						angles[]={0,0.82538366,0};
+					};
+					side="East";
+					flags=3;
+					class Attributes
+					{
+						init="call{this disableAI ""move"";}";
+					};
+					id=54;
+					type="LOP_ChDKZ_Infantry_MG_Asst";
+					atlOffset=10.798004;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="allowDamage";
+							expression="_this allowdamage _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"BOOL"
+										};
+									};
+									value=0;
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="speaker";
+							expression="_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="RHS_Male05RUS";
+								};
+							};
+						};
+						class Attribute2
+						{
+							property="pitch";
+							expression="_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"SCALAR"
+										};
+									};
+									value=0.97000003;
+								};
+							};
+						};
+						class Attribute3
+						{
+							property="enableStamina";
+							expression="_this enablestamina _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"BOOL"
+										};
+									};
+									value=0;
+								};
+							};
+						};
+						nAttributes=4;
+					};
+				};
+			};
+			class Attributes
+			{
+				behaviour="CARELESS";
+			};
+			id=53;
+			atlOffset=10.798004;
+		};
+		class Item5
+		{
+			dataType="Group";
+			side="East";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4894.1265,16.955959,14582.96};
+						angles[]={0,4.5074916,0};
+					};
+					side="East";
+					flags=7;
+					class Attributes
+					{
+						isPlayer=1;
+					};
+					id=55;
+					type="LOP_ChDKZ_Infantry_Commander";
+					atlOffset=3.8146973e-006;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="speaker";
+							expression="_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="RHS_Male02RUS";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="pitch";
+							expression="_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"SCALAR"
+										};
+									};
+									value=0.97000003;
+								};
+							};
+						};
+						nAttributes=2;
+					};
+				};
+			};
+			class Attributes
+			{
+			};
+			id=56;
+			atlOffset=3.8146973e-006;
+		};
+		class Item6
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={3153.4185,78.371269,13081.721};
+			};
+			id=57;
+			type="ModuleChemlight_F";
+			atlOffset=0.0069732666;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ModuleChemlight_F_Type";
+					expression="_this setVariable ['Type',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="ACE_G_Chemlight_HiRed";
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item7
+		{
+			dataType="Marker";
+			position[]={3625.863,17.386,12935.537};
+			name="marker_2";
+			text="Light visibility";
+			markerType="ELLIPSE";
+			type="ellipse";
+			fillName="Border";
+			a=1500;
+			b=1500;
+			drawBorder=1;
+			id=59;
+			atlOffset=2.4931297;
+		};
+		class Item8
+		{
+			dataType="Marker";
+			position[]={3665.6287,158.41499,12940.457};
+			name="marker_3";
+			text="sound max";
+			markerType="ELLIPSE";
+			type="ellipse";
+			fillName="Border";
+			a=3000;
+			b=3000;
+			drawBorder=1;
+			id=60;
+			atlOffset=141.67853;
+		};
+	};
+};
