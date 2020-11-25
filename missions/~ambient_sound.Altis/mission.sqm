@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=61;
+		nextID=63;
 	};
 	class MarkerIDProvider
 	{
@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={3144.7346,81.006058,13081.687};
-		dir[]={0.85177988,-0.51268584,-0.10802711};
-		up[]={0.5086208,0.8585704,-0.064506352};
-		aside[]={-0.12582001,-1.147273e-007,-0.99207956};
+		pos[]={4590.8071,89.075409,14380.109};
+		dir[]={-0.67060232,-0.3303825,-0.6642518};
+		up[]={-0.2347431,0.94383574,-0.23252074};
+		aside[]={-0.70376992,-2.8638169e-007,0.71049678};
 	};
 };
 binarizationWanted=0;
@@ -27,7 +27,6 @@ sourceName="~ambient_sound";
 addons[]=
 {
 	"CUP_Editor_Rocks_Config",
-	"A3_Ui_F",
 	"po_main",
 	"A3_Modules_F_Effects",
 	"po_factions_fic",
@@ -37,7 +36,7 @@ class AddonsMetaData
 {
 	class List
 	{
-		items=6;
+		items=5;
 		class Item0
 		{
 			className="CUP_Editor_Rocks_Config";
@@ -45,31 +44,24 @@ class AddonsMetaData
 		};
 		class Item1
 		{
-			className="A3_Ui_F";
-			name="Arma 3 - User Interface";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
-		};
-		class Item2
-		{
 			className="po_main";
 			name="po_main";
 			author="Leight, Keeway";
 		};
-		class Item3
+		class Item2
 		{
 			className="A3_Modules_F";
 			name="Arma 3 Alpha - Scripted Modules";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item4
+		class Item3
 		{
 			className="po_factions_fic";
 			name="po_factions_fic";
 			author="Leight, Keeway";
 		};
-		class Item5
+		class Item4
 		{
 			className="po_vehicles";
 			name="asr_ai3_popfor_c";
@@ -135,7 +127,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=9;
+		items=6;
 		class Item0
 		{
 			dataType="Object";
@@ -157,16 +149,6 @@ class Mission
 		};
 		class Item1
 		{
-			dataType="Marker";
-			position[]={3786.0842,15.676758,12743.725};
-			name="marker_6";
-			type="mil_arrow";
-			angle=312.99112;
-			id=20;
-			atlOffset=-6.3555088;
-		};
-		class Item2
-		{
 			dataType="Object";
 			class PositionInfo
 			{
@@ -181,7 +163,7 @@ class Mission
 			type="lop_Flag_ua_F";
 			atlOffset=8.7291031;
 		};
-		class Item3
+		class Item2
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -215,7 +197,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item4
+		class Item3
 		{
 			dataType="Group";
 			side="East";
@@ -328,7 +310,7 @@ class Mission
 			id=53;
 			atlOffset=10.798004;
 		};
-		class Item5
+		class Item4
 		{
 			dataType="Group";
 			side="East";
@@ -340,8 +322,8 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={4894.1265,16.955959,14582.96};
-						angles[]={0,4.5074916,0};
+						position[]={4586.3872,85.709091,14374.631};
+						angles[]={0,3.7593203,0};
 					};
 					side="East";
 					flags=7;
@@ -351,7 +333,7 @@ class Mission
 					};
 					id=55;
 					type="LOP_ChDKZ_Infantry_Commander";
-					atlOffset=3.8146973e-006;
+					atlOffset=-7.6293945e-006;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -400,9 +382,9 @@ class Mission
 			{
 			};
 			id=56;
-			atlOffset=3.8146973e-006;
+			atlOffset=-7.6293945e-006;
 		};
-		class Item6
+		class Item5
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -435,36 +417,6 @@ class Mission
 				};
 				nAttributes=1;
 			};
-		};
-		class Item7
-		{
-			dataType="Marker";
-			position[]={3625.863,17.386,12935.537};
-			name="marker_2";
-			text="Light visibility";
-			markerType="ELLIPSE";
-			type="ellipse";
-			fillName="Border";
-			a=1500;
-			b=1500;
-			drawBorder=1;
-			id=59;
-			atlOffset=2.4931297;
-		};
-		class Item8
-		{
-			dataType="Marker";
-			position[]={3665.6287,158.41499,12940.457};
-			name="marker_3";
-			text="sound max";
-			markerType="ELLIPSE";
-			type="ellipse";
-			fillName="Border";
-			a=3000;
-			b=3000;
-			drawBorder=1;
-			id=60;
-			atlOffset=141.67853;
 		};
 	};
 };

@@ -1,4 +1,7 @@
-
+/**
+stolen from dedmen 
+thanks helpmen
+*/
 params["_pos"];
 { 
 private _lamps =_pos nearObjects [_x, 5000]; //radius in metern, thisTrigger kann auch variablenname von objekt sein   
