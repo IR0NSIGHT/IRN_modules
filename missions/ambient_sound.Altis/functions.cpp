@@ -12,6 +12,7 @@ class CfgFunctions
 			class killLights {file = "WOLF_Modules\ambient_battle\functions\fn_killLights.sqf"};
 			class interpolate {file = "WOLF_Modules\ambient_battle\functions\fn_interpolate.sqf"};
 			class travelTime {file = "WOLF_Modules\ambient_battle\functions\fn_travelTime.sqf"};
+			class delayedSound {file = "WOLF_Modules\ambient_battle\functions\fn_delayedSound.sqf"};
         };
     };
 };

@@ -181,21 +181,12 @@ while {time < _end} do {
 				] remoteExec ["IRN_fnc_explosionLight",_id,false];
 
 				//spawn a delayed sound effect for the explosion
-				//TODO introduce delayed remotesound as custom function? use in spawnSalvo
-				[_expSound,_expposLocal,_expVol,_id,_distanceDelay] spawn {
-
-					params ["_expSound","_expposLocal","_expVol","_id","_distanceDelay"];
-
-					sleep _distanceDelay;
-
-					[[_expSound, nil, false, _expposLocal, _expVol, 1, 0]] remoteExec ["playSound3D",_id] ; // play sound !double array is required
-
-				};
+				private _soundProperties = [_expSound,_expposLocal,_expVol,_distanceDelay];
+				[_soundProperties] remoteExec ["IRN_fnc_delayedSound",_id]
 			};
 
 			//DEBUG
 			if (_debug) then {
-				
 				//create/update a marker for each player, put at position of soundsource
 				_marker = _x select 2;
 				
