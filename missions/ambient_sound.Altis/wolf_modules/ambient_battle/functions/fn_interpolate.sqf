@@ -5,6 +5,7 @@ params["_pos","_min","_max","_debug","_return","_success"];
 _success = false; //if viable params have been passed. will log error if not
 if (_debug) then {
 	diag_log ["fnc interpolate runs with:",_this];
+	//systemchat str ["fnc interpolate runs with:",_this];
 };
 /*if (_pos isEqualType [] && _max isEqualType []) then {
 	_success = true;
@@ -15,12 +16,13 @@ if (_pos isEqualType objNull && _pos isEqualType objNull) then {
 };*/
 if (_pos isEqualType 0 && _max isEqualType 0) then {
 	_success = true;
-	_return = ((_max - _pos)/_max);
+	_return = ((_pos - _min)/(_max - _min));
 	diag_log ["type number, return: ", _return];
 };
 if (_debug && !_success) then {
-	diag_log ["fn_interpolate has failed with params: ", _this];
+	diag_log ["########## fn_interpolate has failed with params: ", _this];
 };
 if (!_success) exitWith {}; //kill if no useful params were passed
 _return
 
+//hint str ([800,800,3000,true] call IRN_fnc_interpolate)

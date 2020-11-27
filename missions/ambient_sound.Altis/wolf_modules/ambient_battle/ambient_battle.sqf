@@ -9,7 +9,7 @@ will only execute on the server machine and remotely execute sounds on all clien
 
 //FIXME clean up variables
 
-diag_Log ["----------","IRN_ambient_battle",_this]; 
+diag_Log ["----------","IRN_ambient_battle with params",_this]; 
 
 //TODO move input parameters here
 params ["_action", "_ambientbattle","_maxDistance","_debug","_duration","_dist","_center"];
@@ -17,9 +17,9 @@ params ["_action", "_ambientbattle","_maxDistance","_debug","_duration","_dist",
 if (!isServer || _action !="init") exitWith {}; //only executes ingame, not in Eden
 
 //technical variables
-private ["_i","_start","_end"];
+private ["_i","_start","_end","_expPosGlobal","_expSound","_min"];
 _i = 0;
-
+_min = 800;
 //list of shooting sounds
 private	_listShots = [
 		"A3\Sounds_F\weapons\HMG\HMG_gun.wss",
@@ -134,8 +134,14 @@ while {time < _end} do {
 			//machine id of player for remoteexec
 			_id = owner _player; //you cant own a person ! thats racist!
 
+			//100% at 800m, 0% at _maxDistance
+			
+			private _percentClose = 1 - ([((_player distance _center) max _min) min _maxDistance, _min, _maxDistance, true] call IRN_fnc_interpolate);
 			//volume that sounds play at, depends on distance to _center
-			_volume = 0.6 + 0.4 * ([(_player distance _expPosGlobal),0,_maxDistance,true] call IRN_fnc_interpolate);
+			_volume = _percentClose max 0.5;
+		//	systemChat str ["volume: ",100 * _volume];
+			//pitch of the sounds. far away sounds are lower pitched and slower than nearby ones. value between 0.6 and 1
+			_pitch = _volume max 0.6;
 
 			//volume that explosions play at. slightly higher than shots.
 			_expVol = _volume + 0.2;
@@ -151,6 +157,7 @@ while {time < _end} do {
 				_delay,
 				_distanceDelay,
 				_volume,
+				_pitch,
 				_tracerVector,
 				_tracerColor,
 				_tracerPos
@@ -158,7 +165,7 @@ while {time < _end} do {
 
 			//------------------------------explosions
 			if (_spawnExplosion) then {
-
+				//position of the source of the sound, 400m from player. local and different to each client
 				_expposLocal = [getPosASL _player,_expPosGlobal,_dist] call IRN_fnc_calcSoundPos;
 
 				private ["_colour","_lifeTime","_intensity"];
@@ -181,8 +188,8 @@ while {time < _end} do {
 				] remoteExec ["IRN_fnc_explosionLight",_id,false];
 
 				//spawn a delayed sound effect for the explosion
-				private _soundProperties = [_expSound,_expposLocal,_expVol,_distanceDelay];
-				[_soundProperties] remoteExec ["IRN_fnc_delayedSound",_id]
+				private _soundProperties = [_expSound,_expposLocal,_expVol,_distanceDelay,_pitch];
+				_soundProperties remoteExec ["IRN_fnc_delayedSound",_id]
 			};
 
 			//DEBUG

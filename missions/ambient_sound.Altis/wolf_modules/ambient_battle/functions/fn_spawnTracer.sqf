@@ -17,9 +17,15 @@ private _vessel = "B_408_Ball" createVehicleLocal _pos;
 _lightpoint lightAttachObject [_vessel,[0,0,0]];
 _vessel setVelocity _vector;
 //kill after 3 seconds
-_handle = [3,_lightpoint,_vessel] spawn {
+private _parameters = [3,_lightpoint,_vessel];
+_parameters spawn {
 	params ["_time","_lightpoint","_vessel"];
-	sleep _time;
+	diag_log ["##### tracer killswitch spawned with ",_this];
+	waitUntil {
+		sleep 0.05;
+		_time = _time - 0.05;
+		(_time <= 0 || isNull _vessel)
+	};
 	deleteVehicle _lightpoint;
 	deleteVehicle _vessel;
 }

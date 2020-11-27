@@ -6,6 +6,7 @@ _dist: distance offset from the player in meters where the fake soundsource will
 _headPos: return value, position in posASL where the fake sound source should be.
 */
 params ["_player","_center","_dist","_headPos"];
+diag_log ["########## fnc calcSoundPos called with ",_this];
 _posP = _player;	//getpos player
 _posC = _center;	//getpos of center
 _direction = _posC vectorDiff _posP; //get desired positon of selfiestick headgear

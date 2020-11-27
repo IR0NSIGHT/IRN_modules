@@ -14,7 +14,7 @@ _lightpoint setLightDayLight true; // only for the light itself, not the flare
 
 //kill after 3 seconds
 _handle = [0.1,_lightpoint] spawn {
-	params ["_time","_lightpoint","_vessel"];
+	params ["_time","_lightpoint"];
 	sleep _time;
 	deleteVehicle _lightpoint;
 }
