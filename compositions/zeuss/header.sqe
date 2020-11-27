@@ -1,0 +1,22 @@
+version=54;
+name="zeuss";
+author="IR0NSIGHT";
+category="EdSubcat_Default";
+requiredAddons[]=
+{
+	"rhsusf_c_troops",
+	"asr_ai3_rhs_us_c",
+	"rhsusf_c_weapons",
+	"hlcweapons_core",
+	"UK3CB_BAF_Weapons_Ammo_RHS",
+	"ace_compat_rhs_usf3",
+	"ace_vector",
+	"A3_Weapons_F",
+	"A3_GPNVG18",
+	"A3_Weapons_F_Items",
+	"ace_medical_engine",
+	"ace_medical_treatment",
+	"ace_attach",
+	"ace_chemlights",
+	"A3_Modules_F_Curator_Curator"
+};

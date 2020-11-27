@@ -138,7 +138,7 @@ while {time < _end} do {
 			
 			private _percentClose = 1 - ([((_player distance _center) max _min) min _maxDistance, _min, _maxDistance, true] call IRN_fnc_interpolate);
 			//volume that sounds play at, depends on distance to _center
-			_volume = _percentClose max 0.5;
+			_volume = (_percentClose max 0.5)  - 0.2;
 		//	systemChat str ["volume: ",100 * _volume];
 			//pitch of the sounds. far away sounds are lower pitched and slower than nearby ones. value between 0.6 and 1
 			_pitch = _volume max 0.6;
