@@ -130,7 +130,7 @@ while {time < _end} do {
 
 	}; //for loop end
 	
-	systemChat str _i;
+//	systemChat str _i;
 	sleep random 5;
 };
 if (_debug) then {

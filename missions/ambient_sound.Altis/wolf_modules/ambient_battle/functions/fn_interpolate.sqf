@@ -1,5 +1,6 @@
-//this is a test comment
-params["_pos","_min","_max","_debug","_return","_success"];
+//put in (numbers) pos min max, receive % on scale
+params["_pos","_min","_max","_debug"];
+private ["_return","_success"];
 //takes in positions or objects
 //decide which overlaod to use
 _success = false; //if viable params have been passed. will log error if not
