@@ -60,47 +60,26 @@ if (_debug) then {
 _start = time;
 _end = _start + _duration;
 
-//kill all lights 
-//TODO remove kill lights
-[
-	getPos _center
-] call IRN_fnc_killLights;
-_sourcesList = [];
+//TODO create object
+_hashObject = center;
 
 while {time < _end} do {
 	//TODO add breakout condition
 	//loop 
 	_i = _i + 1;
 
-	//--------collect source position individual to player
-	//foreach player, calculate soundsource position and store.
-	//TODO switch to using hashmap, namespace of center object
-	//create storage object at center position, make invisible. (ab) use as hashmap container for storing playermarkers
-	{
-		_sourcePos = [getPosASL _x,getPosASL _center,_dist,[0,0,0]] call IRN_fnc_calcSoundPos;
-		_player = _x;
-		_idx = _sourcesList findif {_player in _x};
-		if (_idx == -1) then {
-			//diag_log "first entry for player";
-			_sourcesList pushBack [_player,_sourcePos];
-		} else {
-			(_sourcesList select _foreachIndex) set [1,_sourcePos];
-			//diag_log ["overwrote pos for player",_player,_sourcesList select _foreachIndex select 1];
-		}
-	} forEach allPlayers;
-
-	
-	if (_debug) then {
-		diag_log ["#################################################################calculated pos for players, sourceslist:",_sourcesList];
-	};
-
 	//--------------play sounds
-	for "_i" from 0 to 1 do {
+	for "_i" from 0 to 1 do { //amount of salvos spawned
+		//create parameters for the salvo to spawn.
+
 		//soundfile selected for the salvos
 		_sound = selectRandom _listShots;
 	
 		//amount of shots spawned/fired
 		_shots = selectRandom [round (10 + random 20),3,2];
+
+		//firerate of salvo
+		_fireRate = 0.1;
 
 		//time delay until salvo is spawned, used to randomize
 		_delay = round (random 5);
@@ -114,6 +93,26 @@ while {time < _end} do {
 		//true position the tracers are fired from, synched
 		_tracerPos = (getPosASL _center) vectorAdd [-100 + random 200, -100 + random 200, 0];
 
+		//determine if flak fire or single, misplaced tracers
+		_flak = [
+			1,		//tracers every x _shots
+			true,	//random angle
+			0.2		//random chance tracer
+		];
+
+		//spawn a coroutine that creates global bullets, local tracerlights and delayed sounds for all players
+		[
+			_sound,
+			_shots,
+			_fireRate,
+			_delay,
+			_tracerVector,
+			_tracerColor,
+			_tracerPos,
+			_flak
+		] spawn IRN_fnc_spawnSalvo;
+
+
 		//boolean if explosion is spawned. random chance activated, synched
 		_spawnExplosion = (random 100 < 20);
 
@@ -125,120 +124,13 @@ while {time < _end} do {
 			_expSound = selectRandom _listExp;
 		};
 
-		{ //FOREACH PLAYER  --- code in here is individual to each player!!
-			//local soundsource for player
-			_pos = _x select 1;
+		//spawn global tracers
 
-			//playerobject
-			_player = _x select 0;
+		//spawn global coroutine the plays sound for the clients
 
-			//machine id of player for remoteexec
-			_id = owner _player; //you cant own a person ! thats racist!
-
-			//100% at 800m, 0% at _maxDistance
-			
-			private _percentClose = 1 - ([((_player distance _center) max _min) min _maxDistance, _min, _maxDistance, true] call IRN_fnc_interpolate);
-			//volume that sounds play at, depends on distance to _center
-			_volume = (_percentClose max 0.5)  - 0.2;
-		//	systemChat str ["volume: ",100 * _volume];
-			//pitch of the sounds. far away sounds are lower pitched and slower than nearby ones. value between 0.6 and 1
-			_pitch = _volume max 0.6;
-
-			//volume that explosions play at. slightly higher than shots.
-			_expVol = _volume + 0.2;
-
-			//time delay between tracers and sounds bc traveltime of sound
-			_distanceDelay = [333,(_player distance _center)] call IRN_fnc_travelTime;
-
-			//spawn a salvo with params, consisting of tracers and sound
-			[
-				_sound,
-				_pos,
-				_shots,
-				_delay,
-				_distanceDelay,
-				_volume,
-				_pitch,
-				_tracerVector,
-				_tracerColor,
-				_tracerPos
-			] remoteExec ["IRN_fnc_spawnSalvo",_id];
-
-			//------------------------------explosions
-			if (_spawnExplosion) then {
-				//position of the source of the sound, 400m from player. local and different to each client
-				_expposLocal = [getPosASL _player,_expPosGlobal,_dist] call IRN_fnc_calcSoundPos;
-
-				private ["_colour","_lifeTime","_intensity"];
-
-				//colour of explosion in rgb
-				_colour = [1,0.7,0.2];
-
-				//life time of explosion light in seconds
-				_lifeTime = 0.1;
-				//TODO allow different sizes of explosions
-				//intensity/brightness of explosion light
-				_intensity = 100000;
-
-				//spawn explosion light, will spawn at the global, synched position near the module, but light is local to every player
-				[
-					_expPosGlobal,
-					_colour, 
-					_lifeTime,
-					_intensity
-				] remoteExec ["IRN_fnc_explosionLight",_id,false];
-
-				//spawn a delayed sound effect for the explosion
-				private _soundProperties = [_expSound,_expposLocal,_expVol,_distanceDelay,_pitch];
-				//TOP DOWN: //TODO
-				/**
-				Problem: script causes massive desynchs on server
-				reason: suspected: to many coroutines for delayed sounds
-				possible fix: use one coroutine for each salvo
-
-				Problem: tracers need to be global on MP
-				Fix: create global objects
-
-				Merged:
-				- master script creates global tracers at original position
-				- each player receives a coroutine running at a delay for sound traveltime
-				- coroutine plays sounds after delay at individual fake position
-
-				- spawn tracer
-				{
-					spawn soundSalvo as coroutine with params [shotAmount, shotPosition, kadenz]
-				} foreach player
-
-				soundSalvo:
-				waitUntil (soundDistanceTravelled < player distance shotPosition)
-				calculate fakepos //will calc once per salvo, might lead to funky behaviour with fastmovers. calc foreach shot? to performance intensive?
-				for _i from 0 to shotsAmount
-					playSound3D fakePos
-					sleep kadenz
-				
-				done coroutine
-				 */
-				_soundProperties remoteExec ["IRN_fnc_delayedSound",_id]
-			};
-
-			//DEBUG
-			if (_debug) then {
-				//create/update a marker for each player, put at position of soundsource
-				_marker = _x select 2;
-				
-				if (isNil "_marker") then {
-					_name = name _player + "_soundmarker";
-					_marker = createMarker [_name, _pos];
-					_marker setMarkerType "hd_dot";
-					_marker setMarkerText (name _player);
-					_sourcesList set [_foreachIndex,[_player,_pos,_marker]];	
-				} else {	
-					_marker = _x select 2;
-					_marker setMarkerPos _pos;
-				};
-			}
-		} forEach _sourcesList;	
 	}; //for loop end
+	
+	systemChat str _i;
 	sleep random 5;
 };
 if (_debug) then {

@@ -1,0 +1,13 @@
+//[_bullet,_color] remoteExec ["IRN_fnc_spawnTracerLight",0];
+
+//[player,[1,1,1]] remoteExec ["IRN_fnc_spawnTracerLight",0];
+//[[0,0,100],[1,1,1],getPos player] call IRN_fnc_spawnTracer
+/**
+[] spawn {
+	for "_i" from 0 to 50 do {
+		[[0,0,100],[1,1,1],getPos player] call IRN_fnc_spawnTracer;
+		systemChat str _i;
+		sleep 0.5; 
+	};
+	systemChat "done";
+}
