@@ -60,21 +60,22 @@ if (_debug) then {
 _start = time;
 _end = _start + _duration;
 
-//kill all lights
+//kill all lights 
+//TODO remove kill lights
 [
 	getPos _center
 ] call IRN_fnc_killLights;
 _sourcesList = [];
 
 while {time < _end} do {
-	//loop
+	//TODO add breakout condition
+	//loop 
 	_i = _i + 1;
-	if (_debug) then {
-		systemChat ("round: " + str _i);	
-	};
 
 	//--------collect source position individual to player
 	//foreach player, calculate soundsource position and store.
+	//TODO switch to using hashmap, namespace of center object
+	//create storage object at center position, make invisible. (ab) use as hashmap container for storing playermarkers
 	{
 		_sourcePos = [getPosASL _x,getPosASL _center,_dist,[0,0,0]] call IRN_fnc_calcSoundPos;
 		_player = _x;
@@ -161,7 +162,7 @@ while {time < _end} do {
 				_tracerVector,
 				_tracerColor,
 				_tracerPos
-			] remoteExec ["IRN_fnc_spawnSalvo",_id,false]; //NOTE: jip true collects sounds to play at joining
+			] remoteExec ["IRN_fnc_spawnSalvo",_id];
 
 			//------------------------------explosions
 			if (_spawnExplosion) then {
@@ -175,7 +176,7 @@ while {time < _end} do {
 
 				//life time of explosion light in seconds
 				_lifeTime = 0.1;
-
+				//TODO allow different sizes of explosions
 				//intensity/brightness of explosion light
 				_intensity = 100000;
 
@@ -189,6 +190,34 @@ while {time < _end} do {
 
 				//spawn a delayed sound effect for the explosion
 				private _soundProperties = [_expSound,_expposLocal,_expVol,_distanceDelay,_pitch];
+				//TOP DOWN: //TODO
+				/**
+				Problem: script causes massive desynchs on server
+				reason: suspected: to many coroutines for delayed sounds
+				possible fix: use one coroutine for each salvo
+
+				Problem: tracers need to be global on MP
+				Fix: create global objects
+
+				Merged:
+				- master script creates global tracers at original position
+				- each player receives a coroutine running at a delay for sound traveltime
+				- coroutine plays sounds after delay at individual fake position
+
+				- spawn tracer
+				{
+					spawn soundSalvo as coroutine with params [shotAmount, shotPosition, kadenz]
+				} foreach player
+
+				soundSalvo:
+				waitUntil (soundDistanceTravelled < player distance shotPosition)
+				calculate fakepos //will calc once per salvo, might lead to funky behaviour with fastmovers. calc foreach shot? to performance intensive?
+				for _i from 0 to shotsAmount
+					playSound3D fakePos
+					sleep kadenz
+				
+				done coroutine
+				 */
 				_soundProperties remoteExec ["IRN_fnc_delayedSound",_id]
 			};
 
