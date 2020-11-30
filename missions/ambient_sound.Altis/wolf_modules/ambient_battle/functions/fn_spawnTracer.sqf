@@ -2,7 +2,7 @@
 //fnc_spawnTracer: 
 params["_vector","_color","_pos"];
 diag_log ["################################# fnc_spawnTracer called with: ",["_vector","_color"],_this];
-
+systemChat "tracer spawned";
 private _bullet = "B_408_Ball" createVehicle _pos;
 _bullet setVelocity _vector;
 

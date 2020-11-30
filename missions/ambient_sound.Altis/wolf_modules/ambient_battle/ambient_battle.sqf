@@ -37,6 +37,10 @@ private _listExp = [
 		"A3\Sounds_F\weapons\Explosion\expl_big_3.wss"
 ];
 
+if (true) then {
+	systemChat "killing lights";
+	[getPos _center] call IRN_fnc_killLights;
+};
 //debug stuff at start like markers etc.
 if (_debug) then {
     diag_log ["############################## debug is ",_debug];
@@ -76,10 +80,10 @@ while {time < _end} do {
 		_sound = selectRandom _listShots;
 	
 		//amount of shots spawned/fired
-		_shots = selectRandom [round (10 + random 20),3,2];
+		_shots = selectRandom [round (5 + random 10),3,2];
 
 		//firerate of salvo
-		_fireRate = 0.1;
+		_fireRate = 0.05 + random 0.3;
 
 		//time delay until salvo is spawned, used to randomize
 		_delay = round (random 5);
@@ -101,6 +105,7 @@ while {time < _end} do {
 		];
 
 		//spawn a coroutine that creates global bullets, local tracerlights and delayed sounds for all players
+		
 		[
 			_sound,
 			_shots,
@@ -110,28 +115,41 @@ while {time < _end} do {
 			_tracerColor,
 			_tracerPos,
 			_flak
-		] spawn IRN_fnc_spawnSalvo;
+		] spawn IRN_fnc_spawnSalvo; 
+		
 
 
 		//boolean if explosion is spawned. random chance activated, synched
 		_spawnExplosion = (random 100 < 20);
-
+		_spawnExplosion = true;
 		if (_spawnExplosion) then {
 			//simulated, synched positon of explosion
 			_expPosGlobal = (getPosASL _center vectorAdd [-100 + random 200, -100 +random 200, 15]); //TODO set to posAGL z = 15 instead of ASL
 
 			//explosion sound, synched
 			_expSound = selectRandom _listExp;
+			[
+				_expSound,
+				1,
+				0,
+				0,
+				[1,1,1],
+				[1,1,1],
+				_expPosGlobal,
+				[
+					1,
+					false,
+					0
+				]
+			] spawn IRN_fnc_spawnSalvo; //delayed sound for Explosion
+			[_expPosGlobal,[1,0.9,0.7],1,100000] remoteExec ["IRN_fnc_explosionLight",0];
+
 		};
-
-		//spawn global tracers
-
-		//spawn global coroutine the plays sound for the clients
-
 	}; //for loop end
-	
-//	systemChat str _i;
-	sleep random 5;
+		
+	sleep 10;
+	systemChat str _i;
+	sleep 2;
 };
 if (_debug) then {
 	private _string = "finished ambient battles";
