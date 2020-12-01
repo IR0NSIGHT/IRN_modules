@@ -40,7 +40,6 @@ while {_loop} do {
 
 	//breakout condition if all players are handeled
 	if (_handledP isEqualTo allPlayers || _distS >= 5000) exitWith {
-		systemChat "audioLoop done";	
 	};
 
 	//check every player
@@ -62,28 +61,9 @@ while {_loop} do {
 				//pitch depending on distance to global soundsource
 				_pitch = 0.6 max _volume;
 
-				//define parameters for the sound (playSound3d)
-				_left = [
-					_sound,
-					objNull,
-					false,
-					_position,
-					_volume,
-					_pitch,
-					0
-				];
+				//remotely play salvo of sounds on players machine
+				[_sound,_position,_volume,_pitch,_shots,_fireRate] remoteExec ["IRN_fnc_remoteSalvo",_id];
 
-				//FIXME 
-				//debug why sound is so loud, even at distance 
-				//TODO
-				//move into function to call remotely, reduce network traffic
-				[_left,_shots,_id, _fireRate] spawn {
-					params ["_left","_shots","_id","_fireRate"];
-					for "_i" from 0 to _shots do {
-						[_left] remoteExec ["playSound3D",_id];
-						sleep _fireRate;
-					};
-				};
 				//TODO 
 				//debug message
 				systemChat str ["player ",name _x," heard shots at p-distance: ",_distP,"sound distance: ",_distS," after ",time - _timeFired," seconds with vol, pitch",_volume,_pitch];
@@ -93,6 +73,7 @@ while {_loop} do {
 			}
 		}
 	} forEach allPlayers;
-	systemChat str ["handled: ",_handledP," of ",allPlayers];
+//	systemChat str ["handled: ",_handledP," of ",allPlayers];
 	sleep 0.5;
 };
+systemChat "audioLoop done";

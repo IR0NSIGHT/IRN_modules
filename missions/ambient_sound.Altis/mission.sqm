@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={3142.1357,88.830803,13082.319};
-		dir[]={0.75953871,-0.61042786,-0.22471875};
-		up[]={0.58534914,0.79206878,-0.17318238};
-		aside[]={-0.28370774,-2.5221379e-007,-0.95892024};
+		pos[]={3145.7617,83.942818,13082.581};
+		dir[]={0.87966758,-0.44654089,-0.16372629};
+		up[]={0.43900704,0.89475876,-0.081709661};
+		aside[]={-0.18298179,1.4450052e-008,-0.98312312};
 	};
 };
 binarizationWanted=0;
@@ -31,6 +31,15 @@ addons[]=
 	"A3_Modules_F_Effects",
 	"po_factions_fic",
 	"asr_ai3_popfor_c",
+	"rhs_c_weapons",
+	"A3_Weapons_F",
+	"rhs_c_troops",
+	"A3_GPNVG18",
+	"A3_Weapons_F_Items",
+	"ace_medical_engine",
+	"ace_medical_treatment",
+	"asr_ai3_rhs_ru_c",
+	"ace_compat_rhs_afrf3",
 	"rhsusf_c_troops",
 	"asr_ai3_rhs_us_c",
 	"rhsusf_c_weapons",
@@ -38,11 +47,6 @@ addons[]=
 	"UK3CB_BAF_Weapons_Ammo_RHS",
 	"ace_compat_rhs_usf3",
 	"ace_vector",
-	"A3_Weapons_F",
-	"A3_GPNVG18",
-	"A3_Weapons_F_Items",
-	"ace_medical_engine",
-	"ace_medical_treatment",
 	"ace_attach",
 	"ace_chemlights",
 	"A3_Modules_F_Curator_Curator",
@@ -52,7 +56,7 @@ class AddonsMetaData
 {
 	class List
 	{
-		items=20;
+		items=24;
 		class Item0
 		{
 			className="CUP_Editor_Rocks_Config";
@@ -85,99 +89,126 @@ class AddonsMetaData
 		};
 		class Item5
 		{
-			className="rhsusf_c_troops";
-			name="RHSUSF Infantry & Equipment";
+			className="rhs_c_weapons";
+			name="AFRF Weapons Pack";
 			author="Red Hammer Studios";
 			url="http://www.rhsmods.org/";
 		};
 		class Item6
-		{
-			className="asr_ai3_rhs_us_c";
-			name="asr_ai3_rhs_us_c";
-			author="Robalo";
-		};
-		class Item7
-		{
-			className="rhsusf_c_weapons";
-			name="RHSUSF Weapons & Accessories";
-			author="Red Hammer Studios";
-			url="http://www.rhsmods.org/";
-		};
-		class Item8
-		{
-			className="hlcweapons_core";
-			name="hlcweapons_core";
-			author="toadie";
-		};
-		class Item9
-		{
-			className="UK3CB_BAF_Weapons_Ammo_RHS";
-			name="3CB BAF Weapons - Ammo(RHS)";
-			author="3 Commando Brigade";
-			url="www.3commandobrigade.com";
-		};
-		class Item10
-		{
-			className="ace_compat_rhs_usf3";
-			name="ACE3 - RHS USF Compatibility";
-			author="ACE-Team";
-			url="http://ace3mod.com/";
-		};
-		class Item11
-		{
-			className="ace_vector";
-			name="ACE3 - Vector";
-			author="ACE-Team";
-			url="http://ace3mod.com/";
-		};
-		class Item12
 		{
 			className="A3_Weapons_F";
 			name="Arma 3 Alpha - Weapons and Accessories";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item13
+		class Item7
+		{
+			className="rhs_c_troops";
+			name="AFRF Infantry & Equipment";
+			author="Red Hammer Studios";
+			url="http://www.rhsmods.org/";
+		};
+		class Item8
 		{
 			className="A3_GPNVG18";
 			name="A3_GPNVG18";
 		};
-		class Item14
+		class Item9
 		{
 			className="ace_medical_engine";
 			name="ACE3 - Medical Engine";
 			author="ACE-Team";
 			url="http://ace3mod.com/";
 		};
-		class Item15
+		class Item10
 		{
 			className="ace_medical_treatment";
 			name="ACE3 - Medical Treatment";
 			author="ACE-Team";
 			url="http://ace3mod.com/";
 		};
+		class Item11
+		{
+			className="asr_ai3_rhs_ru_c";
+			name="asr_ai3_rhs_ru_c";
+			author="Robalo";
+		};
+		class Item12
+		{
+			className="ace_compat_rhs_afrf3";
+			name="ACE3 - RHS AFRF Compatibility";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
+		};
+		class Item13
+		{
+			className="rhsusf_c_troops";
+			name="RHSUSF Infantry & Equipment";
+			author="Red Hammer Studios";
+			url="http://www.rhsmods.org/";
+		};
+		class Item14
+		{
+			className="asr_ai3_rhs_us_c";
+			name="asr_ai3_rhs_us_c";
+			author="Robalo";
+		};
+		class Item15
+		{
+			className="rhsusf_c_weapons";
+			name="RHSUSF Weapons & Accessories";
+			author="Red Hammer Studios";
+			url="http://www.rhsmods.org/";
+		};
 		class Item16
+		{
+			className="hlcweapons_core";
+			name="hlcweapons_core";
+			author="toadie";
+		};
+		class Item17
+		{
+			className="UK3CB_BAF_Weapons_Ammo_RHS";
+			name="3CB BAF Weapons - Ammo(RHS)";
+			author="3 Commando Brigade";
+			url="www.3commandobrigade.com";
+		};
+		class Item18
+		{
+			className="ace_compat_rhs_usf3";
+			name="ACE3 - RHS USF Compatibility";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
+		};
+		class Item19
+		{
+			className="ace_vector";
+			name="ACE3 - Vector";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
+		};
+		class Item20
 		{
 			className="ace_attach";
 			name="ACE3 - Attach";
 			author="ACE-Team";
 			url="http://ace3mod.com/";
 		};
-		class Item17
+		class Item21
 		{
 			className="ace_chemlights";
 			name="ace_chemlights";
 			author="ACE-Team";
 			url="http://ace3mod.com/";
 		};
-		class Item18
+		class Item22
 		{
 			className="A3_Modules_F_Curator";
 			name="Arma 3 Zeus Update - Scripted Modules";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item19
+		class Item23
 		{
 			className="A3_Ui_F";
 			name="Arma 3 - User Interface";
@@ -189,6 +220,7 @@ class AddonsMetaData
 dlcs[]=
 {
 	"LOP_LeightsOPFOR",
+	"RHS_AFRF",
 	"RHS_USAF",
 	"Niarms_Core"
 };
@@ -216,7 +248,6 @@ class Mission
 		month=6;
 		day=24;
 		hour=20;
-		minute=-30;
 		startFogDecay=0.014;
 		forecastFogDecay=0.014;
 		class CustomAttributes
@@ -336,6 +367,91 @@ class Mission
 					class Attributes
 					{
 						init="call{this disableAI ""move"";}";
+						class Inventory
+						{
+							class primaryWeapon
+							{
+								name="rhs_weap_akms";
+								muzzle="rhs_acc_dtkakm";
+								class primaryMuzzleMag
+								{
+									name="rhs_75Rnd_762x39mm_tracer";
+									ammoLeft=75;
+								};
+							};
+							class uniform
+							{
+								typeName="LOP_U_ChDKZ_Fatigue_02";
+								isBackpack=0;
+								class MagazineCargo
+								{
+									items=2;
+									class Item0
+									{
+										name="rhs_mag_rgd5";
+										count=1;
+										ammoLeft=1;
+									};
+									class Item1
+									{
+										name="rhs_75Rnd_762x39mm_tracer";
+										count=2;
+										ammoLeft=75;
+									};
+								};
+								class ItemCargo
+								{
+									items=1;
+									class Item0
+									{
+										name="FirstAidKit";
+										count=1;
+									};
+								};
+							};
+							class vest
+							{
+								typeName="rhs_6sh46";
+								isBackpack=0;
+								class MagazineCargo
+								{
+									items=1;
+									class Item0
+									{
+										name="rhs_mag_rdg2_white";
+										count=1;
+										ammoLeft=1;
+									};
+								};
+							};
+							class backpack
+							{
+								typeName="LOP_ChDKZ_Caryall_PKM";
+								isBackpack=1;
+								class MagazineCargo
+								{
+									items=2;
+									class Item0
+									{
+										name="rhs_100Rnd_762x54mmR";
+										count=4;
+										ammoLeft=100;
+									};
+									class Item1
+									{
+										name="rhs_75Rnd_762x39mm_tracer";
+										count=1;
+										ammoLeft=75;
+									};
+								};
+							};
+							map="ItemMap";
+							compass="ItemCompass";
+							watch="ItemWatch";
+							radio="ItemRadio";
+							goggles="rhs_balaclava1_olive";
+							hmd="A3_GPNVG18_F";
+						};
 					};
 					id=54;
 					type="LOP_ChDKZ_Infantry_MG_Asst";
@@ -660,7 +776,6 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						init="call{[] spawn { " \n " for ""_i"" from 0 to 50 do { " \n "  [[0,0,100],[1,1,1],(getPos player) vectoradd [0,0,5]] call IRN_fnc_spawnTracer; " \n "  systemChat str _i; " \n "  sleep 0.5;  " \n " }; " \n " systemChat ""done""; " \n "}}";
 						name="zeus_02";
 						description="zeus";
 						isPlayer=1;

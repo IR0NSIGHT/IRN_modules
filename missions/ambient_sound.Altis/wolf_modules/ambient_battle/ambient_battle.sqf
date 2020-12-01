@@ -89,7 +89,7 @@ while {time < _end} do {
 		_delay = round (random 5);
 		
 		//vector the tracers are fired at, synched
-		_tracerVector = [400] call IRN_fnc_randomVector;
+		_tracerVector = [800] call IRN_fnc_randomVector;
 
 		//color of the tracers, synched
 		_tracerColor = [1,random 1,0.2];
@@ -99,7 +99,7 @@ while {time < _end} do {
 
 		//determine if flak fire or single, misplaced tracers
 		_flak = [
-			1,		//tracers every x _shots
+			5,		//tracers every x _shots
 			true,	//random angle
 			0.2		//random chance tracer
 		];
@@ -121,7 +121,6 @@ while {time < _end} do {
 
 		//boolean if explosion is spawned. random chance activated, synched
 		_spawnExplosion = (random 100 < 20);
-		_spawnExplosion = true;
 		if (_spawnExplosion) then {
 			//simulated, synched positon of explosion
 			_expPosGlobal = (getPosASL _center vectorAdd [-100 + random 200, -100 +random 200, 15]); //TODO set to posAGL z = 15 instead of ASL
@@ -142,14 +141,14 @@ while {time < _end} do {
 					0
 				]
 			] spawn IRN_fnc_spawnSalvo; //delayed sound for Explosion
-			[_expPosGlobal,[1,0.9,0.7],1,100000] remoteExec ["IRN_fnc_explosionLight",0];
+			[_expPosGlobal,[0.9 + random 0.1,0.8 + random 0.2,0.6 + random 0.2],(30000 + random 70000)] remoteExec ["IRN_fnc_explosionLight",0];
 
 		};
 	}; //for loop end
 		
-	sleep 10;
+	sleep 1;
 	systemChat str _i;
-	sleep 2;
+	sleep 1;
 };
 if (_debug) then {
 	private _string = "finished ambient battles";
