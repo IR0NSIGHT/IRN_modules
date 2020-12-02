@@ -12,7 +12,7 @@ _action = "init";
 diag_Log ["----------","IRN_ambient_battle with params",_this]; 
 
 //TODO move input parameters here
-params ["_minDistance","_maxDistance","_salvoFrequency","_salvoAverage","_expAverage","_endTime","_everyX","_rndVec","_percentTracers","_expColorPalette","_expSize","_expSounds","_shotSounds","_debug","_center"];
+params ["_minDistance","_maxDistance","_salvoFrequency","_salvoAverage","_expAverage","_endTime","_tracerEveryX","_tracerRndVec","_tracerColorPalette","_percentTracers","_expColorPalette","_expSize","_expSounds","_shotSounds","_debug","_center"];
 
 //TODO check if sound has max hearing distance
 
@@ -48,8 +48,9 @@ if (_debug) then {
 	["salvoAverage",_salvoAverage], //average amount of salvos per "skrimish",
 	["expAverage",_expAverage],
 	["end",_endTime],
-	["tracerEveryX",_everyX],
-	["tracersRndVec",_rndVec],
+	["tracerEveryX",_tracerEveryX],
+	["tracersRndVec",_tracerRndVec],
+	["tracerColor",_tracerColorPalette],
 	["percentTracers",_percentTracers],
 	["expColor",_expColorPalette],
 	["expSize",_expSize],
@@ -62,15 +63,15 @@ if (_debug) then {
 _i = 0;
 _min = 800;
 //list of shooting sounds
-private	_listShots = _shotSounds;
+private	_shotSounds = _shotSounds;
 
 //list of explosions
 private _listExp = _expSounds;
-/*
+
 if (true) then {
 	systemChat "killing lights";
-	[getPos _center] call IRN_fnc_killLights;
-};*/
+	[getPos _center] remoteExec ["IRN_fnc_killLights",0,true];
+};
 //debug stuff at start like markers etc.
 if (_debug) then {
     diag_log ["############################## debug is ",_debug];
@@ -99,28 +100,6 @@ while {time < _endTime} do {
 	_i = _i + 1;
 	//update variable from hashobject, if undefined, keep using old one:
 	systemChat str ["iteration:",_i];
-	{
-		if (_debug && !((_x select 1) isEqualTo (_hashObject getVariable [_x select 0,_x select 1]))) then {
-			diag_log ["################# VARIABLE CHANGED #####","old",_tmp,"new",_x select 1];
-			systemChat str ["################# VARIABLE CHANGED #####","old",_tmp,"new",_x select 1];
-		};
-	} foreach [
-		["minDistance",_minDistance],
-		["maxDistance",_maxDistance],
-		["salvoFrequency",_salvoFrequency],
-		["salvoAverage",_salvoAverage], //average amount of salvos per "skrimish",
-		["expAverage",_expAverage],
-		["end",_endTime],
-		["tracerEveryX",_everyX],
-		["tracersRndVec",_rndVec],
-		["percentTracers",_percentTracers],
-		["expColor",_expColorPalette],
-		["expSize",_expSize],
-		["expSounds",_expSounds],
-		["shots",_shotSounds],
-		["debug",_debug],
-		["center",_center]
-	];
 
 	_minDistance = _hashObject getVariable	["minDistance",_minDistance];
 	_maxDistance = _hashObject getVariable	["maxDistance",_maxDistance];
@@ -128,8 +107,9 @@ while {time < _endTime} do {
 	_salvoAverage = _hashObject getVariable	["salvoAverage",_salvoAverage]; //average amount of salvos per "skrimish",
 	_expAverage = _hashObject getVariable	["expAverage",_expAverage];
 	_endTime= _hashObject getVariable	["end",_endTime];
-	_everyX = _hashObject getVariable	["tracerEveryX",_everyX];
-	_rndVec = _hashObject getVariable	["tracersRndVec",_rndVec];
+	_tracerEveryX = _hashObject getVariable	["tracerEveryX",_tracerEveryX];
+	_tracerRndVec = _hashObject getVariable	["tracersRndVec",_tracerRndVec];
+	_tracerColorPalette = _hashObject getVariable	["tracerColor",_tracerColorPalette];
 	_percentTracers = _hashObject getVariable	["percentTracers",_percentTracers];
 	_expColorPalette = _hashObject getVariable	["expColor",_expColorPalette];
 	_expSize = _hashObject getVariable	["expSize",_expSize];
@@ -141,11 +121,11 @@ while {time < _endTime} do {
 
 
 	//--------------play sounds
-	for "_i" from 0 to 1 do { //amount of salvos spawned
+	for "_i" from 0 to _salvoAverage do { //amount of salvos spawned
 		//create parameters for the salvo to spawn.
 
 		//soundfile selected for the salvos
-		_sound = selectRandom _listShots;
+		_sound = selectRandom _shotSounds;
 	
 		//amount of shots spawned/fired
 		_shots = selectRandom [round (5 + random 10),3,2];
@@ -160,16 +140,16 @@ while {time < _endTime} do {
 		_tracerVector = [800] call IRN_fnc_randomVector;
 
 		//color of the tracers, synched
-		_tracerColor = [1,random 1,0.2];
+		_tracerColor = selectRandom _tracerColorPalette;
 
 		//true position the tracers are fired from, synched
 		_tracerPos = (getPosASL _center) vectorAdd [-100 + random 200, -100 + random 200, 0];
 
 		//determine if flak fire or single, misplaced tracers
 		_flak = [
-			5,		//tracers every x _shots
-			true,	//random angle
-			0.2		//random chance tracer
+			_tracerEveryX,		//tracers every x _shots
+			_tracerRndVec,		//random angle t/f
+			_percentTracers		//random chance tracer
 		];
 
 		//spawn a coroutine that creates global bullets, local tracerlights and delayed sounds for all players
@@ -187,7 +167,6 @@ while {time < _endTime} do {
 		] spawn IRN_fnc_spawnSalvo; 
 		
 
-
 		//boolean if explosion is spawned. random chance activated, synched
 		_spawnExplosion = (random 100 < (100 * _expAverage));
 
@@ -197,7 +176,7 @@ while {time < _endTime} do {
 			_expPosGlobal = (getPosASL _center vectorAdd [-100 + random 200, -100 +random 200, 15]); //TODO set to posAGL z = 15 instead of ASL
 
 			//explosion sound, synched
-			_expSound = selectRandom _listExp;
+			_expSound = selectRandom _expSounds;
 			[
 				_expSound,
 				1,
@@ -211,13 +190,17 @@ while {time < _endTime} do {
 					false,
 					0
 				]
-			] spawn IRN_fnc_spawnSalvo; //delayed sound for Explosion
-			[_expPosGlobal,[0.9 + random 0.1,0.8 + random 0.2,0.6 + random 0.2],(30000 + random 70000)] remoteExec ["IRN_fnc_explosionLight",0];
+			] spawn IRN_fnc_spawnSalvo; //delayed sound for Explosion with no bullets
+			[
+				_expPosGlobal,
+				selectRandom _expColorPalette,
+				(10000 + random 40000) * _expSize
+			] remoteExec ["IRN_fnc_explosionLight",0];
 
 		};
 	}; //for loop end
 		
-	sleep 1;
+	sleep _salvoFrequency;
 	systemChat str _i;
 	sleep 1;
 };

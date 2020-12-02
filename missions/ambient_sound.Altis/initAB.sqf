@@ -19,11 +19,59 @@ private _listExp = [
 		"A3\Sounds_F\weapons\Explosion\expl_big_3.wss"
 		//"A3\Sounds_F_arsenal\\Explosives\shells\artillery_shell_explosion_01.wss"
 ];
-
+/*
 [
-	800,4000,3,3,0.2,
-	time + 6000,1,true,
-	1,[[1,1,0],[0,1,1]]
-	,3,_listExp,_listShots,
-	true,center
+	800,
+	4000,
+	3,
+	3,
+	0.2,
+	time + 6000,
+	1,
+	true,
+	[[1,0,1]], //_tracerColorPalette
+	1,
+	[[1,1,0],[0,1,1]],
+	3,
+	_listExp,
+	_listShots,
+	true,
+	center
+] execVM "wolf_modules\ambient_battle\ambient_battle.sqf";
+*/
+/*
+["minDistance",_m
+["maxDistance",_m
+["salvoFrequency"
+["salvoAverage",_
+["expAverage",_ex
+["end",_endTime],
+["tracerEveryX",_
+["tracersRndVec",
+["tracerColor",_t
+["percentTracers"
+["expColor",_expC
+["expSize",_expSi
+["expSounds",_exp
+["shots",_shotSou
+["debug",_debug],
+["center",_center
+*/
+[
+	800, //minDistance
+	4000, //maxDistance
+	3, //salvoFrequency
+	3, //expAverage
+	0.2,
+	time + 6000,
+	1,
+	true,
+	[[1,0,0],[0,0,1]], //_tracerColorPalette
+	1,
+	[[1,1,0],[0,1,1]],
+	5,
+	_listExp, //expSounds
+	_listShots, //shots
+	true, //debug
+	center //center
 ] execVM "wolf_modules\ambient_battle\ambient_battle.sqf";
