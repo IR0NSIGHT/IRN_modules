@@ -8,39 +8,69 @@ will only execute on the server machine and remotely execute sounds on all clien
 //--------------------------------------------------------------------------------------------
 
 //FIXME clean up variables
-
+_action = "init";
 diag_Log ["----------","IRN_ambient_battle with params",_this]; 
 
 //TODO move input parameters here
-params ["_action", "_ambientbattle","_maxDistance","_debug","_duration","_dist","_center"];
+params ["_minDistance","_maxDistance","_salvoFrequency","_salvoAverage","_expAverage","_endTime","_everyX","_rndVec","_percentTracers","_expColorPalette","_expSize","_expSounds","_shotSounds","_debug","_center"];
+
+//TODO check if sound has max hearing distance
 
 if (!isServer || _action !="init") exitWith {}; //only executes ingame, not in Eden
-
 //technical variables
 private ["_i","_start","_end","_expPosGlobal","_expSound","_min"];
+
+//---------------------create an object that holds all params
+//TODO add public vars that can be changed during the mission
+//create a variable holder object
+_hashObject = "Sign_Sphere200cm_Geometry_F" createVehicle ((getPos _center) vectorAdd [0,0,30]);
+
+//hide it
+//add its reference to a global array
+_array = missionNamespace getVariable ["IRN_ambient_battle_modules",[]];
+_hashObject setVehicleVarName ("AmbBattleModule_" + str count _array);
+_array pushBack _hashObject;
+missionNamespace setVariable ["IRN_ambient_battle_modules",_array,true];
+if (_debug) then {
+	diag_log ["hashobject created:",_hashObject,"pushed to missionnamespace as public:",missionNamespace getVariable ["IRN_ambient_battle_modules",[]]];
+};
+
+//---------------------create an object that holds all params END
+
+//fill hashobject with params
+//core params are: distance min/max, frequency, time to stop, tracersparams [everyX, randomVec, %shots]
+{
+	_hashObject setVariable [_x select 0,_x select 1,true];
+} foreach [
+	["minDistance",_minDistance],
+	["maxDistance",_maxDistance],
+	["salvoFrequency",_salvoFrequency],
+	["salvoAverage",_salvoAverage], //average amount of salvos per "skrimish",
+	["expAverage",_expAverage],
+	["end",_endTime],
+	["tracerEveryX",_everyX],
+	["tracersRndVec",_rndVec],
+	["percentTracers",_percentTracers],
+	["expColor",_expColorPalette],
+	["expSize",_expSize],
+	["expSounds",_expSounds],
+	["shots",_shotSounds],
+	["debug",_debug],
+	["center",_center]
+];
+
 _i = 0;
 _min = 800;
 //list of shooting sounds
-private	_listShots = [
-		"A3\Sounds_F\weapons\HMG\HMG_gun.wss",
-		"A3\Sounds_F\weapons\M4\m4_st_1.wss",
-		//"A3\Sounds_F\weapons\M200\M200_burst.wss",
-		"A3\Sounds_F\weapons\mk20\mk20_shot_1.wss"
-];
+private	_listShots = _shotSounds;
 
 //list of explosions
-private _listExp = [
-	//	"A3\Sounds_F\weapons\Explosion\explosion_antitank_1.wss", flashbang sound
-	//	"A3\Sounds_F\weapons\Explosion\expl_shell_1.wss",
-		"A3\Sounds_F\weapons\Explosion\expl_big_1.wss",
-		"A3\Sounds_F\weapons\Explosion\expl_big_2.wss",
-		"A3\Sounds_F\weapons\Explosion\expl_big_3.wss"
-];
-
+private _listExp = _expSounds;
+/*
 if (true) then {
 	systemChat "killing lights";
 	[getPos _center] call IRN_fnc_killLights;
-};
+};*/
 //debug stuff at start like markers etc.
 if (_debug) then {
     diag_log ["############################## debug is ",_debug];
@@ -62,15 +92,53 @@ if (_debug) then {
 };
 
 _start = time;
-_end = _start + _duration;
 
-//TODO create object
-_hashObject = center;
-
-while {time < _end} do {
+while {time < _endTime} do {
 	//TODO add breakout condition
 	//loop 
 	_i = _i + 1;
+	//update variable from hashobject, if undefined, keep using old one:
+	systemChat str ["iteration:",_i];
+	{
+		if (_debug && !((_x select 1) isEqualTo (_hashObject getVariable [_x select 0,_x select 1]))) then {
+			diag_log ["################# VARIABLE CHANGED #####","old",_tmp,"new",_x select 1];
+			systemChat str ["################# VARIABLE CHANGED #####","old",_tmp,"new",_x select 1];
+		};
+	} foreach [
+		["minDistance",_minDistance],
+		["maxDistance",_maxDistance],
+		["salvoFrequency",_salvoFrequency],
+		["salvoAverage",_salvoAverage], //average amount of salvos per "skrimish",
+		["expAverage",_expAverage],
+		["end",_endTime],
+		["tracerEveryX",_everyX],
+		["tracersRndVec",_rndVec],
+		["percentTracers",_percentTracers],
+		["expColor",_expColorPalette],
+		["expSize",_expSize],
+		["expSounds",_expSounds],
+		["shots",_shotSounds],
+		["debug",_debug],
+		["center",_center]
+	];
+
+	_minDistance = _hashObject getVariable	["minDistance",_minDistance];
+	_maxDistance = _hashObject getVariable	["maxDistance",_maxDistance];
+	_salvoFrequency = _hashObject getVariable	["salvoFrequency",_salvoFrequency];
+	_salvoAverage = _hashObject getVariable	["salvoAverage",_salvoAverage]; //average amount of salvos per "skrimish",
+	_expAverage = _hashObject getVariable	["expAverage",_expAverage];
+	_endTime= _hashObject getVariable	["end",_endTime];
+	_everyX = _hashObject getVariable	["tracerEveryX",_everyX];
+	_rndVec = _hashObject getVariable	["tracersRndVec",_rndVec];
+	_percentTracers = _hashObject getVariable	["percentTracers",_percentTracers];
+	_expColorPalette = _hashObject getVariable	["expColor",_expColorPalette];
+	_expSize = _hashObject getVariable	["expSize",_expSize];
+	_expSounds = _hashObject getVariable	["expSounds",_expSounds];
+	_shotSounds = _hashObject getVariable	["shots",_shotSounds];
+	_debug = _hashObject getVariable	["debug",_debug];
+	_center = _hashObject getVariable	["center",_center];
+
+
 
 	//--------------play sounds
 	for "_i" from 0 to 1 do { //amount of salvos spawned
@@ -106,6 +174,7 @@ while {time < _end} do {
 
 		//spawn a coroutine that creates global bullets, local tracerlights and delayed sounds for all players
 		
+		//TODO pass on min and max values
 		[
 			_sound,
 			_shots,
@@ -120,8 +189,10 @@ while {time < _end} do {
 
 
 		//boolean if explosion is spawned. random chance activated, synched
-		_spawnExplosion = (random 100 < 20);
+		_spawnExplosion = (random 100 < (100 * _expAverage));
+
 		if (_spawnExplosion) then {
+
 			//simulated, synched positon of explosion
 			_expPosGlobal = (getPosASL _center vectorAdd [-100 + random 200, -100 +random 200, 15]); //TODO set to posAGL z = 15 instead of ASL
 

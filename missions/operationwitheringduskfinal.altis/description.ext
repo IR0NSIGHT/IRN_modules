@@ -1,0 +1,38 @@
+loadScreen = "images\ks.jpg";
+
+class CfgSounds
+{
+	sounds[] = {};
+	class Golf22
+	{
+		// how the sound is referred to in the editor (e.g. trigger effects)
+		name = "Golf22";
+		// filename, volume, pitch
+		sound[] = {"Sounds\c_m01_35_lift_going_down_ABB_0.ogg", 60, 1};
+		// subtitle delay in seconds, subtitle text
+		titles[] = {1, "Golf 2-2 to Croassroads, we're under fire, Golf 2-2 sustaining heavy fire from our..."};
+	};
+	class Golf41
+	{
+		// how the sound is referred to in the editor (e.g. trigger effects)
+		name = "Golf41";
+		// filename, volume, pitch
+		sound[] = {"Sounds\c_out2_85_the_end_of_all_things_MEM_0.ogg", 60, 1};
+		// subtitle delay in seconds, subtitle text
+		titles[] = {1, "Mayday, Mayday! Golf 4-1 going down!"};
+	};
+};
+
+class CfgMusic
+{
+	tracks[] = {};
+	class MyIntro
+	{
+		// display name
+		name	= "IntroMusic";
+		// filename, volume, pitch
+		sound[]	= { "Sounds\IntroMusic.ogg", 1, 1.0 };
+	};
+};
+
+#include "functions.cpp"

@@ -8,5 +8,3 @@ _bullet setVelocity _vector;
 
 //spawn a client local light on each clientOwner
 [_bullet,_color] remoteExec ["IRN_fnc_spawnTracerLight",0];
-
-
