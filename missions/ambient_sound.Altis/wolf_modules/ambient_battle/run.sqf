@@ -1,3 +1,4 @@
-_array = missionNamespace getVariable ["IRN_ambient_battle_modules",[]];
-_array pushBack ["hello world"];
-missionNamespace setVariable ["IRN_ambient_battle_modules",_array,true];
+	_cases = ["++","+-","--","-+"];
+	_case = selectRandom _cases;
+	_cases= _cases - [_case];
+	hint str _cases;
