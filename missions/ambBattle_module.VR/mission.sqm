@@ -8,14 +8,14 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=4;
+		nextID=5;
 	};
 	class Camera
 	{
-		pos[]={4284.7632,14.675936,2247.0168};
-		dir[]={0.53943783,-0.4843426,0.68878841};
-		up[]={0.29863766,0.8748793,0.38131958};
-		aside[]={0.78729659,-8.5681677e-008,-0.61658615};
+		pos[]={4292.0361,9.7633877,2248.8547};
+		dir[]={0.18304484,-0.60089839,0.77809769};
+		up[]={0.13760318,0.79932481,0.58493322};
+		aside[]={0.97344029,-2.2776658e-007,-0.22899736};
 	};
 };
 binarizationWanted=0;
@@ -87,8 +87,8 @@ class Mission
 			{
 				class Attribute0
 				{
-					property="ModuleAmbientBattles_duration";
-					expression="_this setVariable ['duration',_value,true];";
+					property="ModuleAmbientBattles_salvoFrequency";
+					expression="_this setVariable ['salvoFrequency',_value,true];";
 					class Value
 					{
 						class data
@@ -97,17 +97,17 @@ class Mission
 							{
 								type[]=
 								{
-									"STRING"
+									"SCALAR"
 								};
 							};
-							value="60";
+							value=1;
 						};
 					};
 				};
 				class Attribute1
 				{
-					property="ModuleAmbientBattles_distance";
-					expression="_this setVariable ['distance',_value,true];";
+					property="ModuleAmbientBattles_tracersEveryX";
+					expression="_this setVariable ['tracersEveryX',_value,true];";
 					class Value
 					{
 						class data
@@ -116,17 +116,93 @@ class Mission
 							{
 								type[]=
 								{
-									"STRING"
+									"SCALAR"
 								};
 							};
-							value="50";
+							value=5;
 						};
 					};
 				};
 				class Attribute2
 				{
-					property="ModuleAmbientBattles_maxdistance";
-					expression="_this setVariable ['maxdistance',_value,true];";
+					property="ModuleAmbientBattles_maxDistance";
+					expression="_this setVariable ['maxDistance',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=3000;
+						};
+					};
+				};
+				class Attribute3
+				{
+					property="ModuleAmbientBattles_expSize";
+					expression="_this setVariable ['expSize',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=0.5;
+						};
+					};
+				};
+				class Attribute4
+				{
+					property="ModuleAmbientBattles_salvoAverage";
+					expression="_this setVariable ['salvoAverage',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=5;
+						};
+					};
+				};
+				class Attribute5
+				{
+					property="ModuleAmbientBattles_tracersRndVec";
+					expression="_this setVariable ['tracersRndVec',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				class Attribute6
+				{
+					property="ModuleAmbientBattles_expSounds";
+					expression="_this setVariable ['expSounds',_value,true];";
 					class Value
 					{
 						class data
@@ -138,11 +214,182 @@ class Mission
 									"STRING"
 								};
 							};
-							value="3000";
+							value="[""A3\Sounds_F\weapons\Explosion\expl_big_1.wss"",""A3\Sounds_F\weapons\Explosion\expl_big_2.wss"",""A3\Sounds_F\weapons\Explosion\expl_big_3.wss""]";
 						};
 					};
 				};
-				nAttributes=3;
+				class Attribute7
+				{
+					property="ModuleAmbientBattles_tracerColor";
+					expression="_this setVariable ['tracerColor',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="[[1,0,0],[0,0,1]]";
+						};
+					};
+				};
+				class Attribute8
+				{
+					property="ModuleAmbientBattles_debug";
+					expression="_this setVariable ['debug',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				class Attribute9
+				{
+					property="ModuleAmbientBattles_expAverage";
+					expression="_this setVariable ['expAverage',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=0.2;
+						};
+					};
+				};
+				class Attribute10
+				{
+					property="ModuleAmbientBattles_shots";
+					expression="_this setVariable ['shots',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="[""A3\Sounds_F\weapons\Explosion\expl_big_1.wss"",""A3\Sounds_F\weapons\Explosion\expl_big_2.wss"",""A3\Sounds_F\weapons\Explosion\expl_big_3.wss""]";
+						};
+					};
+				};
+				class Attribute11
+				{
+					property="ModuleAmbientBattles_ModuleDescription";
+					expression="_this setVariable ['ModuleDescription',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="";
+						};
+					};
+				};
+				class Attribute12
+				{
+					property="ModuleAmbientBattles_minDistance";
+					expression="_this setVariable ['minDistance',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=800;
+						};
+					};
+				};
+				class Attribute13
+				{
+					property="ModuleAmbientBattles_end";
+					expression="_this setVariable ['end',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=600;
+						};
+					};
+				};
+				class Attribute14
+				{
+					property="ModuleAmbientBattles_expColor";
+					expression="_this setVariable ['expColor',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="[[1,1,0],[0,1,1]]";
+						};
+					};
+				};
+				class Attribute15
+				{
+					property="ModuleAmbientBattles_percentTracers";
+					expression="_this setVariable ['percentTracers',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=0.2;
+						};
+					};
+				};
+				nAttributes=16;
 			};
 		};
 		class Item1

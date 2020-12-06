@@ -33,7 +33,7 @@ class CfgPatches
 class CfgVehicles 
 	{
         class Logic;
-		class Module_F: Logic;
+		class Module_F: Logic
         {
             class AttributesBase
             {
@@ -76,47 +76,133 @@ class CfgVehicles
             // Menu displayed when the module is placed or double-clicked on by Zeus
             curatorInfoType = "RscDisplayAttributeModuleAmbientBattles";
 
-			class Attributes: AttributesBase
+			class Arguments: AttributesBase
 			{
-				class MyText: Edit
+				class debug
 				{
-					displayName = "a test text attribute";
-					description = "the lord yeeteth and the lord yoinketh. (Lunchbreak 11:10)";
-                    tooltip = "in the name of our overlord IR0NSIGHT";
-                    defaultValue = """Im a text.""";
-				};
-				class duration
+					displayName = "debug mode";
+					description = "0 = off, 1 = on";
+					typeName = "NUMBER";
+					defaultValue = "0";
+				}
+
+				class minDistance
 				{
-					displayName = "Duration";
-					description = "Duration of Sounds in Minutes";
-					class values
-					{                  
-						class 1
-                        {
-                            name = "1 minute";
-                            value = "60";
-                            default = 1;
-                        };                      
-					};
+					displayName="minimum distance";
+					description="minimum distance required to hear ambient sounds at full volume";
+					typeName = "NUMBER";
+					defaultValue="800";
 				};
-				class maxdistance
+
+				class maxDistance
 				{
-					displayName = "Maximum distance";
-					description = "Maximum distance to the module to play sound for the player. If player exceeds the range the sound will be stopped.";
-					class values
-					{                  
-                        class 3000
-                        {
-                            name = "3000 meters";
-                            value = "3000";
-                            default = 1; 
-                        };
-					};
+					displayName="maximum distance";
+					description="maximum distance ambient sounds are audible";
+					typeName = "NUMBER";
+					defaultValue="3000";
 				};
+
+				class salvoFrequency
+				{
+					displayName="salvo frequency";
+					description="downtime between salvo cycles in seconds";
+					typeName = "NUMBER";
+					defaultValue="10";
+				};
+
+				class salvoAverage
+				{
+					displayName="Salvo average";
+					description="amount of salvos spawned per cylce on average";
+					typeName = "NUMBER";
+					defaultValue="3";
+				};
+
+				class expAverage
+				{
+					displayName="Explosion probability";
+					description="percent 0..1 of an explosion being spawned per cycle";
+					typeName = "NUMBER";
+					defaultValue="0.2";
+				};
+
+				class end
+				{
+					displayName = "end";
+					description = "duration for the ambient battle to last in seconds";
+					typeName = "NUMBER";
+					defaultValue="600";
+				};
+
+				class tracersEveryX
+				{
+					displayName = "Tracers every -x- shots";
+					description = "Spawn a tracer after every -x- shots in a salvo. Is overwritten by tracerpercentage.";
+					typeName = "NUMBER";
+					defaultValue="5";
+				};
+
+				class percentTracers
+				{
+					displayName = "Random chance of tracer";
+					description = "Spawn a tracer with a chance of 0..1. 'Overwrites Tracers every -x- shots'";
+					typeName = "NUMBER";
+					defaultValue="0.2";
+				};
+
+				class tracersRndVec
+				{
+					displayName = "Give tracers random direction";
+					description = "0: salvos will fire in the same direction (flak). 1: every tracer will have random direction.";
+					typeName = "NUMBER";
+					defaultValue="1";
+				};
+
+				class tracerColor
+				{
+					displayName = "Color palette for tracers";
+					description = "Salvo colors are randomly selected from this list. format [r0..1,g0..1,b0..1]";
+					typeName = "ArgTypeTEXT";
+					defaultValue="[[1,0,0],[0,0,1]]";
+				};
+
+				class expColor
+				{
+					displayName = "Color palette for explosions";
+					description = "Explosion colors are randomly selected from this list. format [r0..1,g0..1,b0..1]";
+					typeName = "ArgTypeTEXT";
+					defaultValue="[[1,1,0],[0,1,1]]";
+				};
+
+				class expSize
+				{
+					displayName = "Explosion light intensity";
+					description = "Brightness of an explosion lighting up surroundings.";
+					typeName = "NUMBER";
+					defaultValue="0.5";
+				};
+
+				class expSounds
+				{
+					displayName = "List of explosion sounds";
+					description = "List of filepaths to used explosion sounds.";
+					typeName = "ArgTypeTEXT";
+					defaultValue="[""A3\Sounds_F\weapons\Explosion\expl_big_1.wss"",""A3\Sounds_F\weapons\Explosion\expl_big_2.wss"",""A3\Sounds_F\weapons\Explosion\expl_big_3.wss""]";
+				};
+
+				class shots
+				{
+					displayName = "List of gun sounds";
+					description = "List of filepaths to used gun sounds.";
+					typeName = "ArgTypeTEXT";
+					defaultValue="[""A3\Sounds_F\weapons\Explosion\expl_big_1.wss"",""A3\Sounds_F\weapons\Explosion\expl_big_2.wss"",""A3\Sounds_F\weapons\Explosion\expl_big_3.wss""]";
+				};
+
                 class ModuleDescription: ModuleDescription
                 {
+					displayName = "Description";
                     position = 1;
-                    description = "Create ambient battle sounds. Sound center is module position.";
+                    defaultValue = """Create an ambient fake-battle using audio and visual methods at the modules positon.""";
                 };
 			};
 
