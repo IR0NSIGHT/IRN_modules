@@ -23,3 +23,14 @@ core code provided by Dedmen. Will kill (almost) all lights in specified radius.
 - tanoa powerline pole lamps survive
 - some lights like gasstation and hospital cant be killed
 - unknown behaviour for JIP players
+## Usage
+You are allowed to use this work according to the attached license.
+
+## Contributors
+- Code:
+IR0NSIGHT
+- support:
+KiritoKun
+AlexMason
+Dedmen
+arma3 community
