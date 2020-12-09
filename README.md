@@ -4,7 +4,7 @@ this mod contains two editor modules for arma 3:
 - Blackout
 
 ## Ambient battle
-Ambient  battle creates a fake battle at its position through spawning shot sounds, tracer bullets and explosion lights and sounds. The sounds are audible at any distance (configurable in options). Sounds take the correct amount of time to travel from source to player, all visual and audio effects are synched between players. Network traffic is reduced as much as possible. 
+Ambient  battle creates a fake battle at its position through spawning shot sounds, tracer bullets and explosion lights and sounds. The sounds are audible at any distance (configurable in options). Sounds take the correct amount of time to travel from source to player, all visual and audio effects are synchronised between players. Network traffic is reduced as much as possible. 
 The module is highly configurable, from amount of shots over time, to color of tracers and explosions to soundfiles used. 
 The modules settings can be accessed from outside during runtime, by using yourLogicModule setVariable ["varname",value];. the next iteration will run with the new settings.
 
@@ -16,7 +16,7 @@ Ambient Battle is trigger activated.
 - tracers might not work in a dedicated server Multiplayer environment. cause is unknown.
 
 ## Blackout
-core code provided by Dedmen. Will kill (almost) all lights in specified radius. trigger activated.
+Core code provided by Dedmen. Will kill (almost) all lights in specified radius. trigger activated.
 
 ### issues:
 - unknown streetlight classes will be ignored
@@ -28,9 +28,9 @@ You are allowed to use this work according to the attached license.
 
 ## Contributors
 - Code:
-IR0NSIGHT
-Dedmen
+[IR0NSIGHT] (https://github.com/IR0NSIGHT)
+[Dedmen] (https://github.com/Dedmen)
 - support:
-KiritoKun
-AlexMason
-arma3 community
+[KiritoKun] (https://github.com/KiritoKun223)
+[AlexMason] (https://github.com/AlexMason1)
+Arma 3 community 
