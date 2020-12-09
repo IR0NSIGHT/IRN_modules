@@ -10,5 +10,16 @@ The modules settings can be accessed from outside during runtime, by using yourL
 
 Ambient Battle is trigger activated.
 
+### issues:
+- lights/tracers might not be visible during day
+- lights/tracers might not be visible in heavily illuminated areas or from far away (light engine problem). Easy fix is to use "Blackout" to kill all lights.
+- tracers might not work in a dedicated server Multiplayer environment. cause is unknown.
+
 ## Blackout
-core code made by Dedmen. Will kill (almost) all lights in specified radius. trigger activated. Known exceptions are the Tanoa streetlights that hang on powerline-poles.
+core code provided by Dedmen. Will kill (almost) all lights in specified radius. trigger activated.
+
+### issues:
+- unknown streetlight classes will be ignored
+- tanoa powerline pole lamps survive
+- some lights like gasstation and hospital cant be killed
+- unknown behaviour for JIP players
