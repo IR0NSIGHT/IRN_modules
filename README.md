@@ -29,8 +29,8 @@ You are allowed to use this work according to the attached license.
 ## Contributors
 - Code:
 IR0NSIGHT
+Dedmen
 - support:
 KiritoKun
 AlexMason
-Dedmen
 arma3 community
