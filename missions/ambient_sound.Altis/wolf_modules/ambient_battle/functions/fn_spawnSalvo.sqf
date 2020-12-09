@@ -4,7 +4,7 @@ runs local on client
 */
 params["_sound","_shots","_fireRate","_delay","_tracerVector","_tracerColor","_tracerPos","_flak"];
 sleep _delay;
-diag_log ["################################# fnc_spawnsalvo called with: ",["_sound","_pos","_shots","_delay","_volume","_tracerVector","_tracerColor"],_this];
+//diag_log ["fnc_spawnsalvo called with: ",["_sound","_pos","_shots","_delay","_volume","_tracerVector","_tracerColor"],_this];
 private ["_everyX","_rndVec","_rndChance","_timeFired"];
 _everyX = _flak select 0; //
 _rndVec = _flak select 1; //false
@@ -30,7 +30,7 @@ private ["_distS","_distP","_handledP"];
 
 //list of players that already had the sound played
 _handledP = [];
-//systemChat "tracers";
+
 while {_loop} do {
 	//calculate how sound has travelled rn
 
@@ -64,16 +64,11 @@ while {_loop} do {
 				//remotely play salvo of sounds on players machine
 				[_sound,_position,_volume,_pitch,_shots,_fireRate] remoteExec ["IRN_fnc_remoteSalvo",_id];
 
-				//TODO 
-				//debug message
-				systemChat str ["player ",name _x," heard shots at p-distance: ",_distP,"sound distance: ",_distS," after ",time - _timeFired," seconds with vol, pitch",_volume,_pitch];
-
 				//remove from list
 				_handledP pushBack _x;
 			}
 		}
 	} forEach allPlayers;
-//	systemChat str ["handled: ",_handledP," of ",allPlayers];
 	sleep 0.5;
 };
-systemChat "audioLoop done";
+

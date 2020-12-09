@@ -18,12 +18,10 @@ if (_pos isEqualType objNull && _pos isEqualType objNull) then {
 if (_pos isEqualType 0 && _max isEqualType 0) then {
 	_success = true;
 	_return = ((_pos - _min)/(_max - _min));
-	diag_log ["type number, return: ", _return];
+	//diag_log ["type number, return: ", _return];
 };
 if (_debug && !_success) then {
 	diag_log ["########## fn_interpolate has failed with params: ", _this];
 };
 if (!_success) exitWith {}; //kill if no useful params were passed
 _return
-
-//hint str ([800,800,3000,true] call IRN_fnc_interpolate)

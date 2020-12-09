@@ -8,25 +8,22 @@ will only execute on the server machine and remotely execute sounds on all clien
 //--------------------------------------------------------------------------------------------
 
 //FIXME clean up variables
-_action = "init";
-diag_Log ["----------","IRN_ambient_battle with params",_this]; 
+
+diag_Log ["IRN_ambient_battle with params",_this]; 
 
 //TODO move input parameters here
 params ["_minDistance","_maxDistance","_salvoFrequency","_salvoAverage","_expAverage","_endTime","_tracerEveryX","_tracerRndVec","_tracerColorPalette","_percentTracers","_expColorPalette","_expSize","_expSounds","_shotSounds","_debug","_center"];
 
 //TODO check if sound has max hearing distance
 
-if (!isServer || _action !="init") exitWith {}; //only executes ingame, not in Eden
+if (!isServer) exitWith {}; //only executes ingame, not in Eden
 //technical variables
-private ["_i","_start","_end","_expPosGlobal","_expSound","_min"];
+private ["_i","_end","_expPosGlobal","_expSound"];
 
 //---------------------create an object that holds all params
-//TODO add public vars that can be changed during the mission
-//create a variable holder object
-_hashObject = "Sign_Sphere200cm_Geometry_F" createVehicle ((getPos _center) vectorAdd [0,0,30]);
+//_hashObject = "Sign_Sphere200cm_Geometry_F" createVehicle ((getPos _center) vectorAdd [0,0,30]);
+_hashObject = _center; //module reference
 
-//hide it
-//add its reference to a global array
 _array = missionNamespace getVariable ["IRN_ambient_battle_modules",[]];
 _hashObject setVehicleVarName ("AmbBattleModule_" + str count _array);
 _array pushBack _hashObject;
@@ -60,18 +57,9 @@ if (_debug) then {
 	["center",_center]
 ];
 
-_i = 0;
-_min = 800;
-//list of shooting sounds
-private	_shotSounds = _shotSounds;
-
 //list of explosions
 private _listExp = _expSounds;
 
-if (true) then {
-	systemChat "killing lights";
-	[getPos _center] remoteExec ["IRN_fnc_killLights",0,true];
-};
 //debug stuff at start like markers etc.
 if (_debug) then {
     diag_log ["############################## debug is ",_debug];
@@ -92,14 +80,12 @@ if (_debug) then {
 	"starting ambient_battles" remoteExec ["systemChat",0, true];
 };
 
-_start = time;
-
+_i = 0;
 while {time < _endTime} do {
 	//TODO add breakout condition
 	//loop 
 	_i = _i + 1;
 	//update variable from hashobject, if undefined, keep using old one:
-	systemChat str ["iteration:",_i];
 
 	_minDistance = _hashObject getVariable	["minDistance",_minDistance];
 	_maxDistance = _hashObject getVariable	["maxDistance",_maxDistance];
@@ -117,8 +103,6 @@ while {time < _endTime} do {
 	_shotSounds = _hashObject getVariable	["shots",_shotSounds];
 	_debug = _hashObject getVariable	["debug",_debug];
 	_center = _hashObject getVariable	["center",_center];
-
-
 
 	//--------------play sounds
 	for "_i" from 0 to _salvoAverage do { //amount of salvos spawned
@@ -201,8 +185,6 @@ while {time < _endTime} do {
 	}; //for loop end
 		
 	sleep _salvoFrequency;
-	systemChat str _i;
-	sleep 1;
 };
 if (_debug) then {
 	private _string = "finished ambient battles";
