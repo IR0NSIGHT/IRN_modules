@@ -28,9 +28,9 @@ You are allowed to use this work according to the attached license.
 
 ## Contributors
 - Code:
-[IR0NSIGHT] (https://github.com/IR0NSIGHT)
-[Dedmen] (https://github.com/Dedmen)
+[IR0NSIGHT](https://github.com/IR0NSIGHT)
+[Dedmen](https://github.com/Dedmen)
 - support:
-[KiritoKun] (https://github.com/KiritoKun223)
-[AlexMason] (https://github.com/AlexMason1)
+[KiritoKun](https://github.com/KiritoKun223)
+[AlexMason](https://github.com/AlexMason1)
 Arma 3 community 
