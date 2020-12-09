@@ -30,7 +30,7 @@ You are allowed to use this work according to the attached license.
 - Code:
 [IR0NSIGHT](https://github.com/IR0NSIGHT)
 [Dedmen](https://github.com/Dedmen)
-- support:
+- Support:
 [KiritoKun](https://github.com/KiritoKun223)
 [AlexMason](https://github.com/AlexMason1)
 Arma 3 community 
