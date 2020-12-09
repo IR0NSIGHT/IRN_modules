@@ -1,0 +1,414 @@
+version=54;
+class EditorData
+{
+	moveGridStep=1;
+	angleGridStep=0.2617994;
+	scaleGridStep=1;
+	autoGroupingDist=10;
+	toggles=1;
+	class ItemIDProvider
+	{
+		nextID=6;
+	};
+	class Camera
+	{
+		pos[]={9935.8271,440.23608,13368.203};
+		dir[]={0.18190736,-0.88422811,0.43018243};
+		up[]={0.34438378,0.46704382,0.81441301};
+		aside[]={0.92104,-1.6856939e-007,-0.38947245};
+	};
+};
+binarizationWanted=0;
+sourceName="~ambBattle_module";
+addons[]=
+{
+	"IRN_ambientBattle",
+	"A3_Characters_F",
+	"asr_ai3_skills"
+};
+class AddonsMetaData
+{
+	class List
+	{
+		items=2;
+		class Item0
+		{
+			className="IRN_ambientBattle";
+			name="IRN_ambientBattle";
+		};
+		class Item1
+		{
+			className="A3_Characters_F";
+			name="Arma 3 Alpha - Characters and Clothing";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+	};
+};
+randomSeed=808826;
+class ScenarioData
+{
+	author="IR0NSIGHT";
+};
+class Mission
+{
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		wavesForced=1;
+		windForced=1;
+		year=2035;
+		month=6;
+		day=24;
+		hour=3;
+		minute=-7;
+		startFogDecay=0.014;
+		forecastFogDecay=0.014;
+	};
+	class Entities
+	{
+		items=4;
+		class Item0
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={3763.8362,18.719713,13046.677};
+			};
+			id=1;
+			type="ModuleBlackout";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ModuleBlackout_range";
+					expression="_this setVariable ['range',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="SCALAR";
+							value=3000;
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="ModuleBlackout_chance";
+					expression="_this setVariable ['chance',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="SCALAR";
+							value=1;
+						};
+					};
+				};
+				class Attribute2
+				{
+					property="ModuleBlackout_debug";
+					expression="_this setVariable ['debug',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="SCALAR";
+							value=0;
+						};
+					};
+				};
+				nAttributes=3;
+			};
+		};
+		class Item1
+		{
+			dataType="Trigger";
+			position[]={3676.6379,13.203251,13039.497};
+			class Attributes
+			{
+				condition="call{true}";
+				sizeA=0;
+				sizeB=0;
+			};
+			id=2;
+			type="EmptyDetector";
+		};
+		class Item2
+		{
+			dataType="Group";
+			side="West";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3546.4065,11.802078,12879.423};
+					};
+					side="West";
+					flags=7;
+					class Attributes
+					{
+						isPlayer=1;
+					};
+					id=4;
+					type="B_Soldier_A_F";
+				};
+			};
+			class Attributes
+			{
+			};
+			id=3;
+		};
+		class Item3
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={3762.0254,18.85,12980.378};
+			};
+			id=5;
+			type="ModuleAmbientBattles";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ModuleAmbientBattles_expColor";
+					expression="_this setVariable ['expColor',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="STRING";
+							value="[[0.98,1,0.53],[1,0.8,0.2],[1,0.64,0.21]]";
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="ModuleAmbientBattles_salvoFrequency";
+					expression="_this setVariable ['salvoFrequency',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="SCALAR";
+							value=10;
+						};
+					};
+				};
+				class Attribute2
+				{
+					property="ModuleAmbientBattles_tracersEveryX";
+					expression="_this setVariable ['tracersEveryX',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="SCALAR";
+							value=5;
+						};
+					};
+				};
+				class Attribute3
+				{
+					property="ModuleAmbientBattles_debug";
+					expression="_this setVariable ['debug',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="SCALAR";
+							value=0;
+						};
+					};
+				};
+				class Attribute4
+				{
+					property="ModuleAmbientBattles_expSize";
+					expression="_this setVariable ['expSize',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="SCALAR";
+							value=0.5;
+						};
+					};
+				};
+				class Attribute5
+				{
+					property="ModuleAmbientBattles_end";
+					expression="_this setVariable ['end',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="SCALAR";
+							value=600;
+						};
+					};
+				};
+				class Attribute6
+				{
+					property="ModuleAmbientBattles_maxDistance";
+					expression="_this setVariable ['maxDistance',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="SCALAR";
+							value=3000;
+						};
+					};
+				};
+				class Attribute7
+				{
+					property="ModuleAmbientBattles_percentTracers";
+					expression="_this setVariable ['percentTracers',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="SCALAR";
+							value=0.2;
+						};
+					};
+				};
+				class Attribute8
+				{
+					property="ModuleAmbientBattles_salvoAverage";
+					expression="_this setVariable ['salvoAverage',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="SCALAR";
+							value=3;
+						};
+					};
+				};
+				class Attribute9
+				{
+					property="ModuleAmbientBattles_tracerColor";
+					expression="_this setVariable ['tracerColor',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="STRING";
+							value="[[0.98,1,0.53],[1,0.8,0.2],[1,0.64,0.21]]";
+						};
+					};
+				};
+				class Attribute10
+				{
+					property="ModuleAmbientBattles_tracersRndVec";
+					expression="_this setVariable ['tracersRndVec',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="SCALAR";
+							value=1;
+						};
+					};
+				};
+				class Attribute11
+				{
+					property="ModuleAmbientBattles_expAverage";
+					expression="_this setVariable ['expAverage',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="SCALAR";
+							value=0.2;
+						};
+					};
+				};
+				class Attribute12
+				{
+					property="ModuleAmbientBattles_shots";
+					expression="_this setVariable ['shots',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="STRING";
+							value="[""a3\sounds_f\weapons\mk20\mk20_shot_1.wss"",""a3\sounds_f\weapons\mk20\mk20_shot_1b.wss"",""a3\sounds_f\weapons\mk20\mk20_shot_2.wss"",""a3\sounds_f\weapons\mk20\mk20_shot_3.wss"",""a3\sounds_f\weapons\mk26\mk26_1.wss"",""a3\sounds_f\weapons\mk26\mk26_2.wss"",""a3\sounds_f\weapons\mk26\mk26_3.wss""]";
+						};
+					};
+				};
+				class Attribute13
+				{
+					property="ModuleAmbientBattles_minDistance";
+					expression="_this setVariable ['minDistance',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="SCALAR";
+							value=800;
+						};
+					};
+				};
+				class Attribute14
+				{
+					property="ModuleAmbientBattles_ModuleDescription";
+					expression="_this setVariable ['ModuleDescription',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="STRING";
+							value="""Create an ambient fake-battle using audio and visual methods at the modules positon.""";
+						};
+					};
+				};
+				nAttributes=15;
+			};
+		};
+	};
+	class Connections
+	{
+		class LinkIDProvider
+		{
+			nextID=2;
+		};
+		class Links
+		{
+			items=2;
+			class Item0
+			{
+				linkID=0;
+				item0=2;
+				item1=1;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item1
+			{
+				linkID=1;
+				item0=5;
+				item1=2;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+		};
+	};
+};

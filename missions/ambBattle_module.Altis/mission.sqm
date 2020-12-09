@@ -19,7 +19,7 @@ class EditorData
 	};
 };
 binarizationWanted=0;
-sourceName="~tempMissionSP";
+sourceName="ambBattle_module";
 addons[]=
 {
 	"IRN_ambientBattle",
