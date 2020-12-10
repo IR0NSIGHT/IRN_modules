@@ -56,7 +56,7 @@ while {_loop} do {
 				_position = [getPos _x, _tracerPos, 100] call IRN_fnc_calcSoundPos;
 				
 				//volume dependeing on distance to global soundsource
-				_volume = 0.8 min ( 0.5 max ((1 - ([_distP,800,4000,true] call IRN_fnc_interpolate) ) * 0.8));
+				_volume = 0.8 min ( 0.3 max ((1 - ([_distP,400,4000,true] call IRN_fnc_interpolate) ) * 0.6));
 				
 				//pitch depending on distance to global soundsource
 				_pitch = 0.5 max _volume - 0.2;

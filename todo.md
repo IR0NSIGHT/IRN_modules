@@ -12,6 +12,8 @@
 ## hotfixes
 - make sounds less loud
 - fix distance based loudness once and forall
+- test (and fix) tracers on dedicated
+- make spawnSalvo use maxDistance
 
 ## wanted features
 ### add ability for close-by fakebattles
