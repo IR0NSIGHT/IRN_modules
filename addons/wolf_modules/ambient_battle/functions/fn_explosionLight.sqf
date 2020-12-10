@@ -1,5 +1,5 @@
 params["_pos","_color","_intensity"];
-diag_log ["################################# fnc_explosionLight called with: ",["_pos","_color","_size","_brightness"],_this];
+//diag_log ["################################# fnc_explosionLight called with: ",["_pos","_color","_size","_brightness"],_this];
 private _lightpoint = "#lightpoint" createVehicleLocal _pos;
 _pos = _pos vectorAdd [0,0,2];
 

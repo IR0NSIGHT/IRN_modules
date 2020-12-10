@@ -1,4 +1,5 @@
 //get a grid with no player in it around center
+// !! THIS FUNCTION IS IN DEV STAGE AND NOT READY TO BE USED !!
 params ["_pos","_minDist","_maxDist"];
 _pos = [5,5,0];
 _minDist = 5;

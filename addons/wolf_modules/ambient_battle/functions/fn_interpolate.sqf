@@ -3,6 +3,7 @@ params["_pos","_min","_max","_debug"];
 private ["_return","_success"];
 //takes in positions or objects
 //decide which overlaod to use
+//TODO add overload methods
 _success = false; //if viable params have been passed. will log error if not
 if (_debug) then {
 	diag_log ["fnc interpolate runs with:",_this];
